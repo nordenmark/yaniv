@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "118753981156",
+    "firebase_url": "https://yaniv-21766.firebaseio.com",
+    "project_id": "yaniv-21766",
+    "storage_bucket": "yaniv-21766.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:118753981156:android:c78b44947b5f54cfd2b2f1",
+        "android_client_info": {
+          "package_name": "com.nordenshidi.yaniv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "118753981156-davoc6bagc4llpivdbvls85fha0gmtb3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIsdzd4MENm7qodCcTS5LezhhsNlincVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "118753981156-davoc6bagc4llpivdbvls85fha0gmtb3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
