@@ -14,7 +14,7 @@ class PlayersComponent extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       builder: (context) => Container(
-        child: Text(player.name),
+        child: ScoreFormComponent(player: player),
       ),
     );
   }
