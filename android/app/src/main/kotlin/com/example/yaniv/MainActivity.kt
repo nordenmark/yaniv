@@ -1,4 +1,4 @@
-package com.example.yaniv
+package com.nordenshidi.yaniv
 
 import android.os.Bundle
 
