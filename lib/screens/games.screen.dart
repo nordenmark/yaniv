@@ -22,8 +22,8 @@ class GamesScreen extends StatelessWidget {
             if (!snapshot.hasData) {
               return new Center(child: new CircularProgressIndicator());
             }
-            Map<dynamic, dynamic> data = snapshot.data.documents.first.data;
-            debugPrint(data.toString());
+            List<DocumentSnapshot> data = snapshot.data.documents;
+            data.forEach((game) => debugPrint(game.data.toString()));
             return new Center(child: new Text("DATA LOADED"));
           }),
       floatingActionButton: FloatingActionButton(
