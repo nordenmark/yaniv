@@ -8,7 +8,7 @@ class GameScreen extends StatelessWidget {
   final Game game = Game.randomize();
 
   void _sortPlayersByScore(List<Player> players) {
-    players.sort((Player p1, Player p2) => p2.score - p1.score);
+    players.sort((Player p1, Player p2) => p2.points - p1.points);
   }
 
   @override

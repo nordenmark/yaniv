@@ -20,7 +20,7 @@ class PlayersComponent extends StatelessWidget {
           height: 50,
           child: ListTile(
               title: Text(player.name),
-              trailing: Text(player.score.toString())),
+              trailing: Text(player.points.toString())),
         );
       },
     );
