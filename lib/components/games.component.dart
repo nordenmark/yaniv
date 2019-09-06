@@ -27,7 +27,7 @@ class GamesComponent extends StatelessWidget {
           height: 50,
           child: ListTile(
             // This should be depending on the completed flag
-            leading: Icon(Icons.check),
+            leading: game.completed ? Icon(Icons.check) : new Text(''),
             title: Text(_playersToList(game.players)),
             trailing: Icon(Icons.keyboard_arrow_right),
           ),

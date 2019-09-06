@@ -26,7 +26,9 @@ class GamesScreen extends StatelessWidget {
             List<DocumentSnapshot> data = snapshot.data.documents;
             List<Game> games = data.map((game) {
               List<dynamic> players = game['players'];
+              debugPrint(game['completed'].toString());
               return new Game(
+                completed: game['completed'],
                 id: game.documentID,
                 createdAt: game['createdAt'],
                 players: players
