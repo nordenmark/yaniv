@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-// import 'package:yaniv/models/game.model.dart';
+import 'package:yaniv/components/games.component.dart';
+import 'package:yaniv/models/game.model.dart';
+import 'package:yaniv/models/player.model.dart';
 
 class GamesScreen extends StatelessWidget {
   @override
@@ -23,8 +24,17 @@ class GamesScreen extends StatelessWidget {
               return new Center(child: new CircularProgressIndicator());
             }
             List<DocumentSnapshot> data = snapshot.data.documents;
-            data.forEach((game) => debugPrint(game.data.toString()));
-            return new Center(child: new Text("DATA LOADED"));
+            List<Game> games = data.map((game) {
+              List<dynamic> players = game['players'];
+              return new Game(
+                id: game.documentID,
+                createdAt: game['createdAt'],
+                players: players
+                    .map((player) => new Player.fromJSON(new Map.from({"name": "Damoon", "points": 120})))
+                    .toList(),
+              );
+            }).toList();
+            return new GamesComponent(games: games);
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {},
