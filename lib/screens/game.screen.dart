@@ -21,7 +21,9 @@ class GameScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Game scores"),
       ),
-      body: PlayersComponent(players: this.game.players),
+      body: this.game.players.length > 0
+          ? PlayersComponent(players: this.game.players)
+          : Center(child: Text('No players added, go ahead and add some!')),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint('Add player');

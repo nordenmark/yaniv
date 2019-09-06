@@ -9,10 +9,17 @@ class GamesComponent extends StatelessWidget {
 
   final List<Game> games;
 
-  String _playersToList(List<Player> players) {
-    return players.map((Player player) {
+  Text _playersToListTitle(List<Player> players) {
+    if (players.length == 0) {
+      return Text('No players added...',
+          style: TextStyle(fontStyle: FontStyle.italic));
+    }
+
+    String title = players.map((Player player) {
       return player.name;
     }).join(', ');
+
+    return Text(title);
   }
 
   void _handleTappedGame(BuildContext context, Game game) {
@@ -41,7 +48,7 @@ class GamesComponent extends StatelessWidget {
                     color: Colors.green,
                   )
                 : new Text(''),
-            title: Text(_playersToList(game.players)),
+            title: _playersToListTitle(game.players),
             trailing: Icon(Icons.keyboard_arrow_right),
             onTap: () => _handleTappedGame(context, game),
           ),
