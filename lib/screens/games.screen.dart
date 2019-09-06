@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
-import 'dart:developer' as developer;
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class GamesScreen extends StatelessWidget {
+
+  test() {
+    Firestore.instance.collection('games').document().setData({'bla': 'test', 'bla2': 1});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,9 +15,7 @@ class GamesScreen extends StatelessWidget {
         title: Text('List of all games'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          developer.log('Create new game');
-        },
+        onPressed: test,
         tooltip: 'Create new game',
         child: Icon(Icons.add),
       ),
