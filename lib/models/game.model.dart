@@ -19,7 +19,8 @@ class Game {
 
   Game.randomize() {
     id = faker.guid.guid();
-    players = List.generate(random.integer(8), (n) => Player.randomize());
+    players =
+        List.generate(random.integer(8, min: 2), (n) => Player.randomize());
     completed = random.boolean();
     createdAt = Timestamp.fromMillisecondsSinceEpoch(10000);
   }

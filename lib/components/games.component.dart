@@ -24,13 +24,14 @@ class GamesComponent extends StatelessWidget {
         Game game = games[index];
 
         return Container(
-            height: 50,
-            child: Row(
-              children: <Widget>[
-                Text(game.createdAt.toString()),
-                Expanded(child: Text(_playersToList(game.players)))
-              ],
-            ));
+          height: 50,
+          child: ListTile(
+            // This should be depending on the completed flag
+            leading: Icon(Icons.check),
+            title: Text(_playersToList(game.players)),
+            trailing: Icon(Icons.keyboard_arrow_right),
+          ),
+        );
       },
     );
   }
