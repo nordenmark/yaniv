@@ -39,7 +39,7 @@ class GamesScreen extends StatelessWidget {
             return new GamesComponent(games: games);
           }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () => debugPrint('Create new game'),
         tooltip: 'Create new game',
         child: Icon(Icons.add),
       ),

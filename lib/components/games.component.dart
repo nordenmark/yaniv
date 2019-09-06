@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:yaniv/models/game.model.dart';
 import 'package:yaniv/models/player.model.dart';
+import 'package:yaniv/screens/game.screen.dart';
 
 class GamesComponent extends StatelessWidget {
   GamesComponent({this.games});
@@ -14,6 +15,15 @@ class GamesComponent extends StatelessWidget {
     }).join(', ');
   }
 
+  void _handleTappedGame(BuildContext context, Game game) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => GameScreen(game: game),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -24,12 +34,16 @@ class GamesComponent extends StatelessWidget {
         Game game = games[index];
 
         return Container(
-          height: 50,
           child: ListTile(
-            // This should be depending on the completed flag
-            leading: game.completed ? Icon(Icons.check) : new Text(''),
+            leading: game.completed
+                ? Icon(
+                    Icons.check,
+                    color: Colors.green,
+                  )
+                : new Text(''),
             title: Text(_playersToList(game.players)),
             trailing: Icon(Icons.keyboard_arrow_right),
+            onTap: () => _handleTappedGame(context, game),
           ),
         );
       },

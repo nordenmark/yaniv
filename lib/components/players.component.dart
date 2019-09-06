@@ -8,7 +8,7 @@ class PlayersComponent extends StatelessWidget {
 
   final List<Player> players;
 
-  void handleTappedPlayer(Player player, BuildContext context) {
+  void _handleTappedPlayer(Player player, BuildContext context) {
     debugPrint(player.name);
 
     showModalBottomSheet(
@@ -29,14 +29,15 @@ class PlayersComponent extends StatelessWidget {
         Player player = players[index];
 
         return Container(
-          height: 50,
           child: ListTile(
-              leading: Text(player.points.toString()),
-              title: Text(player.name),
-              trailing: Icon(Icons.keyboard_arrow_right),
-              onTap: () {
-                handleTappedPlayer(player, context);
-              }),
+            leading: Text(
+              player.points.toString(),
+              style: TextStyle(fontSize: 18.0),
+            ),
+            title: Text(player.name),
+            trailing: Icon(Icons.keyboard_arrow_right),
+            onTap: () => _handleTappedPlayer(player, context),
+          ),
         );
       },
     );
