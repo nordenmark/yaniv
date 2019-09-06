@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaniv/screens/game.screen.dart';
 import 'package:yaniv/screens/games.screen.dart';
 
 void main() => runApp(MyApp());
@@ -21,6 +22,10 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: GamesScreen());
+        initialRoute: '/',
+        routes: {
+          '/': (context) => GamesScreen(),
+          '/game': (context) => GameScreen(),
+        });
   }
 }
