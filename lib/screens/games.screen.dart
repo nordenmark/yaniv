@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:yaniv/models/game.model.dart';
+import 'dart:developer' as developer;
+
+import 'package:yaniv/models/game.model.dart';
+import 'package:yaniv/components/games.component.dart';
 
 class GamesScreen extends StatelessWidget {
+  final List<Game> games = [];
 
-  test() {
-    Firestore.instance.collection('games').document().setData({'bla': 'test', 'bla2': 1});
+  _createNewGame() {
+    developer.log('Create new game');
+  }
+
+  GamesScreen() {
+    for (var i = 0; i < 20; i++) {
+      this.games.add(Game.randomize());
+    }
   }
 
   @override
@@ -14,8 +23,9 @@ class GamesScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('List of all games'),
       ),
+      body: GamesComponent(games: this.games),
       floatingActionButton: FloatingActionButton(
-        onPressed: test,
+        onPressed: _createNewGame,
         tooltip: 'Create new game',
         child: Icon(Icons.add),
       ),
