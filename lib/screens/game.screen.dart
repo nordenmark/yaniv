@@ -5,7 +5,9 @@ import 'package:yaniv/models/game.model.dart';
 import 'package:yaniv/models/player.model.dart';
 
 class GameScreen extends StatelessWidget {
-  final Game game = Game.randomize();
+  GameScreen({this.game});
+
+  final Game game;
 
   void _sortPlayersByScore(List<Player> players) {
     players.sort((Player p1, Player p2) => p2.points - p1.points);
@@ -19,7 +21,9 @@ class GameScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Game scores"),
       ),
-      body: PlayersComponent(players: this.game.players),
+      body: this.game.players.length > 0
+          ? PlayersComponent(players: this.game.players)
+          : Center(child: Text('No players added, go ahead and add some!')),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint('Add player');

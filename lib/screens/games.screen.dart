@@ -5,6 +5,20 @@ import 'package:yaniv/models/game.model.dart';
 import 'package:yaniv/models/player.model.dart';
 
 class GamesScreen extends StatelessWidget {
+  void _createNewGame() async {
+    DocumentReference ref = await Firestore.instance
+        .collection('games')
+        .document('nordenmark@gmail.com')
+        .collection('games')
+        .add({
+      'completed': false,
+      'createdAt': Timestamp.now(),
+      'players': [],
+    });
+
+    debugPrint("Game created docID: ${ref.documentID}");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +53,7 @@ class GamesScreen extends StatelessWidget {
             return new GamesComponent(games: games);
           }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () => _createNewGame(),
         tooltip: 'Create new game',
         child: Icon(Icons.add),
       ),
