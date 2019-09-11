@@ -1,37 +1,35 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:yaniv/components/games.component.dart';
 import 'package:yaniv/models/game.model.dart';
 import 'package:yaniv/models/player.model.dart';
+import 'package:yaniv/services/firebase.service.dart';
 
 class GamesScreen extends StatelessWidget {
-  void _createNewGame() async {
-    DocumentReference ref = await Firestore.instance
-        .collection('games')
-        .document('nordenmark@gmail.com')
-        .collection('games')
-        .add({
-      'completed': false,
-      'createdAt': Timestamp.now(),
-      'players': [],
-    });
-
-    debugPrint("Game created docID: ${ref.documentID}");
-  }
+  final FirebaseService firebaseService = FirebaseService();
+  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('List of all games'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.exit_to_app),
+            tooltip: 'Logout',
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+              await googleSignIn.signOut();
+              Navigator.pushNamed(context, '/');
+            },
+          ),
+        ],
       ),
       body: new StreamBuilder(
-          stream: Firestore.instance
-              .collection('games')
-              .document('nordenmark@gmail.com')
-              .collection('games')
-              .getDocuments()
-              .asStream(),
+          stream: firebaseService.getGames(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
@@ -50,10 +48,20 @@ class GamesScreen extends StatelessWidget {
                     .toList(),
               );
             }).toList();
-            return new GamesComponent(games: games);
+
+            if (games.length > 0) {
+              return new GamesComponent(games: games);
+            } else {
+              return Center(
+                child: Text("No games added, go ahead and add one!"),
+              );
+            }
           }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _createNewGame(),
+        onPressed: () async {
+          String id = await firebaseService.createNewGame();
+          debugPrint("Created game ${id}");
+        },
         tooltip: 'Create new game',
         child: Icon(Icons.add),
       ),
