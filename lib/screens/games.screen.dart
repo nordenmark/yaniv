@@ -59,8 +59,7 @@ class GamesScreen extends StatelessWidget {
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          String id = await firebaseService.createNewGame();
-          debugPrint("Created game $id");
+          await firebaseService.createNewGame();
         },
         tooltip: 'Create new game',
         child: Icon(Icons.add),

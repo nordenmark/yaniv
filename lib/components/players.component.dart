@@ -1,22 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:yaniv/components/score-form.component.dart';
-
 import 'package:yaniv/models/player.model.dart';
+import 'package:yaniv/services/firebase.service.dart';
+
+// class PlayersComponent extends StatefulWidget {
+//   final String gameId;
+//   final List<Player> players;
+
+//   PlayersComponent({this.players, this.gameId});
+
+//   @override
+//   PlayersComponentState createState() =>
+//       new PlayersComponentState(gameId: gameId, players: players);
+// }
 
 class PlayersComponent extends StatelessWidget {
-  PlayersComponent({this.players});
+  PlayersComponent({this.gameId, this.players});
 
+  final FirebaseService firebaseService = FirebaseService();
   final List<Player> players;
+  final String gameId;
 
   void _handleTappedPlayer(Player player, BuildContext context) {
-    debugPrint(player.name);
-
     showModalBottomSheet(
-      context: context,
-      builder: (context) => Container(
-        child: ScoreFormComponent(player: player),
-      ),
-    );
+        context: context,
+        builder: (context) => Container(
+            width: 300,
+            height: 200,
+            child: Column(children: [
+              new TextFormField(
+                onFieldSubmitted: (String points) {
+                  firebaseService.addPointsToPlayer(
+                      gameId, player.name, int.parse(points));
+                  Navigator.of(context).pop();
+                },
+              ),
+            ])));
   }
 
   @override

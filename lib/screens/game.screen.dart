@@ -3,7 +3,6 @@ import 'package:yaniv/components/add-player.component.dart';
 
 import 'package:yaniv/components/players.component.dart';
 import 'package:yaniv/models/game.model.dart';
-import 'package:yaniv/models/player.model.dart';
 import 'package:yaniv/services/firebase.service.dart';
 
 class GameScreen extends StatelessWidget {
@@ -12,10 +11,6 @@ class GameScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   GameScreen({this.gameId});
-
-  void _sortPlayersByScore(List<Player> players) {
-    players.sort((Player p1, Player p2) => p2.points - p1.points);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +31,10 @@ class GameScreen extends StatelessWidget {
               return Center(
                   child: Text('No players added, go ahead and add some!'));
             } else {
-              return PlayersComponent(players: game.players);
+              return PlayersComponent(
+                players: game.players,
+                gameId: gameId,
+              );
             }
           }),
       floatingActionButton: FloatingActionButton(

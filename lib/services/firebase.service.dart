@@ -69,7 +69,7 @@ class FirebaseService {
   Future<String> addPlayerToGame(String gameId, String name) async {
     DocumentReference ref = _db
         .collection('games')
-        .document(this.email)
+        .document(email)
         .collection('games')
         .document(gameId);
 
@@ -81,5 +81,46 @@ class FirebaseService {
     }, merge: true);
 
     return ref.documentID;
+  }
+
+  Future<void> completeGame(String gameId) async {
+    // @OTOD implement
+  }
+
+  int _calculatePoints(int oldPoints, int pointsToAdd) {
+    int newPoints = oldPoints + pointsToAdd;
+    if (newPoints == 100 || newPoints == 150) {
+      return newPoints - 50;
+    }
+    if (newPoints == 200) {
+      return 100;
+    }
+    return newPoints;
+  }
+
+  Future<void> addPointsToPlayer(String gameId, String name, int points) async {
+    DocumentReference ref = _db
+        .collection('games')
+        .document(email)
+        .collection('games')
+        .document(gameId);
+
+    List<dynamic> players = (await ref.get()).data['players'];
+
+    players.forEach((player) {
+      if (player['name'] == name) {
+        int updatedPoints = _calculatePoints(player['points'], points);
+        if (updatedPoints > 200) {
+          completeGame(gameId);
+        }
+        player['points'] = updatedPoints;
+      }
+    });
+
+    debugPrint(players.toString());
+
+    await ref.setData({
+      'players': players,
+    }, merge: true);
   }
 }
