@@ -26,7 +26,7 @@ class GamesComponent extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => GameScreen(game: game),
+        builder: (context) => GameScreen(gameId: game.id),
       ),
     );
   }
