@@ -19,19 +19,18 @@ class LoginState extends State<LoginScreen> {
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
 
-    debugPrint(googleAuth.accessToken);
-    debugPrint(googleAuth.idToken);
-
     final AuthCredential credential = GoogleAuthProvider.getCredential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
-    debugPrint(user.toString());
+    try {
+      FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
 
-    // For access later on
-    firebaseService.setEmail(user.email);
-    Navigator.pushNamed(context, '/games');
+      firebaseService.setEmail(user.email);
+      Navigator.pushNamed(context, '/games');
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   @override

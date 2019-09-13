@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaniv/components/add-player.component.dart';
 
 import 'package:yaniv/components/players.component.dart';
 import 'package:yaniv/models/game.model.dart';
@@ -8,6 +9,7 @@ import 'package:yaniv/services/firebase.service.dart';
 class GameScreen extends StatelessWidget {
   final FirebaseService firebaseService = FirebaseService();
   final String gameId;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   GameScreen({this.gameId});
 
@@ -39,7 +41,9 @@ class GameScreen extends StatelessWidget {
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          debugPrint('Add player');
+          showModalBottomSheet(
+              context: context,
+              builder: (context) => new AddPlayer(gameId: this.gameId));
         },
         tooltip: 'Add player',
         child: Icon(Icons.add),

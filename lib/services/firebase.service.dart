@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:yaniv/models/game.model.dart';
 
 import '../models/player.model.dart';
@@ -31,10 +31,7 @@ class FirebaseService {
       List<dynamic> playersJson = game['players'];
 
       List<Player> players = playersJson.map((player) {
-        return Player.fromJSON(new Map.from({
-          "name": player["name"],
-          "points": player["points"],
-        }));
+        return Player.fromJSON(new Map.from(player));
       }).toList();
 
       return new Game(
@@ -65,6 +62,23 @@ class FirebaseService {
       'createdAt': Timestamp.now(),
       'players': [],
     });
+
+    return ref.documentID;
+  }
+
+  Future<String> addPlayerToGame(String gameId, String name) async {
+    DocumentReference ref = _db
+        .collection('games')
+        .document(this.email)
+        .collection('games')
+        .document(gameId);
+
+    List<dynamic> players = List.from((await ref.get()).data['players']);
+    players.insert(players.length, {'name': name, 'points': 0});
+
+    await ref.setData({
+      'players': players,
+    }, merge: true);
 
     return ref.documentID;
   }
