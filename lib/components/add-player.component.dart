@@ -28,23 +28,21 @@ class AddPlayerState extends State<AddPlayer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: 300,
-        height: 200,
-        child: Form(
-            key: _formKey,
-            child: new Column(children: [
-              new TextFormField(
-                controller: nameController,
-                onFieldSubmitted: (String name) {
-                  firebaseService.addPlayerToGame(gameId, name);
-                },
+        child: Padding(
+            padding: EdgeInsets.only(
+                left: 16.0,
+                right: 16.0,
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: TextFormField(
+              textCapitalization: TextCapitalization.sentences,
+              autofocus: true,
+              decoration: const InputDecoration(
+                hintText: 'Player name',
+                labelText: 'Name',
               ),
-              new RaisedButton(
-                child: new Text('Add player'),
-                onPressed: () {
-                  firebaseService.addPlayerToGame(gameId, nameController.text);
-                },
-              )
-            ])));
+              onFieldSubmitted: (String name) {
+                firebaseService.addPlayerToGame(gameId, name);
+              },
+            )));
   }
 }

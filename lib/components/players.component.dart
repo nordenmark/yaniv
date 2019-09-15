@@ -24,17 +24,25 @@ class PlayersComponent extends StatelessWidget {
     showModalBottomSheet(
         context: context,
         builder: (context) => Container(
-            width: 300,
-            height: 200,
-            child: Column(children: [
-              new TextFormField(
+                child: Padding(
+              padding: EdgeInsets.only(
+                  left: 16.0,
+                  right: 16.0,
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: new TextFormField(
+                autofocus: true,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  hintText: 'How many points?',
+                  labelText: 'Points',
+                ),
                 onFieldSubmitted: (String points) {
                   firebaseService.addPointsToPlayer(
                       gameId, player.name, int.parse(points));
                   Navigator.of(context).pop();
                 },
               ),
-            ])));
+            )));
   }
 
   @override
