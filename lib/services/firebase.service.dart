@@ -66,6 +66,15 @@ class FirebaseService {
     return ref.documentID;
   }
 
+  Future<void> deleteGame(String gameId) async {
+    return _db
+        .collection('games')
+        .document(this.email)
+        .collection('games')
+        .document(gameId)
+        .delete();
+  }
+
   Future<String> addPlayerToGame(String gameId, String name) async {
     DocumentReference ref = _db
         .collection('games')

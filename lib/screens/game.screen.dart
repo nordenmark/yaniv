@@ -12,11 +12,45 @@ class GameScreen extends StatelessWidget {
 
   GameScreen({this.gameId});
 
+  _showDeleteConfirmation(BuildContext context) async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text('Are you sure?'),
+            content: new Text(
+                'Your game will be deleted forever, and forever ever.'),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("Cancel"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              new FlatButton(
+                child: new Text("Delete"),
+                textColor: Colors.red,
+                onPressed: () async {
+                  await firebaseService.deleteGame(gameId);
+                  Navigator.pushNamed(context, '/games');
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Game scores"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () => _showDeleteConfirmation(context),
+          )
+        ],
       ),
       body: StreamBuilder(
           stream: firebaseService.getGame(this.gameId),
