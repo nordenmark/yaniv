@@ -2,17 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:yaniv/models/player.model.dart';
 import 'package:yaniv/services/firebase.service.dart';
 
-// class PlayersComponent extends StatefulWidget {
-//   final String gameId;
-//   final List<Player> players;
-
-//   PlayersComponent({this.players, this.gameId});
-
-//   @override
-//   PlayersComponentState createState() =>
-//       new PlayersComponentState(gameId: gameId, players: players);
-// }
-
 class PlayersComponent extends StatelessWidget {
   PlayersComponent({this.gameId, this.players});
 

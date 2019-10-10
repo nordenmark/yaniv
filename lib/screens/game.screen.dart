@@ -8,7 +8,6 @@ import 'package:yaniv/services/firebase.service.dart';
 class GameScreen extends StatelessWidget {
   final FirebaseService firebaseService = FirebaseService();
   final String gameId;
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   GameScreen({this.gameId});
 
