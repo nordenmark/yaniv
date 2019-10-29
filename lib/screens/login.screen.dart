@@ -40,7 +40,6 @@ class LoginState extends State<LoginScreen> {
     );
     try {
       FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
-      print("user" + user.toString());
 
       setState(() {
         showIndicator = false;
