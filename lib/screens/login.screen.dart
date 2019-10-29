@@ -14,12 +14,12 @@ class LoginState extends State<LoginScreen> {
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseService firebaseService = FirebaseService();
-  bool showIndicator = false; 
+  bool showIndicator = false;
 
   @override
   build(BuildContext context) => Scaffold(
         body: showIndicator
-            ? Center(child: CupertinoActivityIndicator())
+            ? Center(child: CircularProgressIndicator())
             : new Center(
                 child: new RaisedButton(
                 child: new Text('Sign in with google'),
@@ -49,7 +49,6 @@ class LoginState extends State<LoginScreen> {
       firebaseService.setEmail(user.email);
       Navigator.pushNamed(context, '/games');
     } catch (e) {
-      print("fsf");
       setState(() {
         showIndicator = false;
       });
