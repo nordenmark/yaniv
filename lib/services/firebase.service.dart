@@ -141,8 +141,10 @@ class FirebaseService {
       }
     });
 
+    players.sort((a, b) => a['points'].compareTo(b['points']));
+
     await ref.setData({
-      'players': players,
+      'players': players.toList(),
     }, merge: true);
   }
 }
