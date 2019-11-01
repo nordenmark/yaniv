@@ -92,6 +92,21 @@ class FirebaseService {
     return ref.documentID;
   }
 
+  Future<void> removePlayerFromGame(String gameId, String name) async {
+    DocumentReference ref = _db
+        .collection('games')
+        .document(email)
+        .collection('games')
+        .document(gameId);
+
+    List<dynamic> players = List.from((await ref.get()).data['players']);
+    players = players.where((player) => player['name'] != name).toList();
+
+    await ref.setData({
+      'players': players,
+    }, merge: true);
+  }
+
   Future<void> completeGame(String gameId) async {
     // @OTOD implement
   }
@@ -125,8 +140,6 @@ class FirebaseService {
         player['points'] = updatedPoints;
       }
     });
-
-    debugPrint(players.toString());
 
     await ref.setData({
       'players': players,

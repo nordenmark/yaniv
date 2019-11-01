@@ -44,6 +44,12 @@ class PlayersComponent extends StatelessWidget {
         Player player = players[index];
 
         return Container(
+            child: Dismissible(
+          key: Key(gameId),
+          direction: DismissDirection.endToStart,
+          onDismissed: (DismissDirection direction) {
+            firebaseService.removePlayerFromGame(gameId, player.name);
+          },
           child: ListTile(
             leading: Text(
               player.points.toString(),
@@ -53,7 +59,7 @@ class PlayersComponent extends StatelessWidget {
             trailing: Icon(Icons.keyboard_arrow_right),
             onTap: () => _handleTappedPlayer(player, context),
           ),
-        );
+        ));
       },
     );
   }
