@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:yaniv/models/game.model.dart';
+import 'package:faker/faker.dart';
 
 import '../models/player.model.dart';
 
@@ -8,6 +8,7 @@ class FirebaseService {
   static final FirebaseService _singleton = new FirebaseService._internal();
   final Firestore _db = Firestore.instance;
   String email;
+  Faker faker = new Faker();
 
   factory FirebaseService() {
     return _singleton;
@@ -61,6 +62,7 @@ class FirebaseService {
       'completed': false,
       'createdAt': Timestamp.now(),
       'players': [],
+      'name': faker.sport.name(),
     });
 
     return ref.documentID;

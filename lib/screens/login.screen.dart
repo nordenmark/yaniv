@@ -37,10 +37,12 @@ class LoginState extends State<LoginScreen> {
                 height: 60,
                 child: new PillButton(
                   opacity: 0.7,
+                  gradient: new LinearGradient(
+                      colors: [Colors.blue[400], Colors.blue[100]]),
                   child: new Text(
                     'SIGN IN WITH GOOGLE',
                     style: const TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold),
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   onPressed: () => _handleLogin(context),
                 ))
