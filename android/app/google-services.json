@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "118753981156-h8k6ppdvsd27eduemkn4gs1qircs1vev.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nordenshidi.yaniv",
+            "certificate_hash": "ddc2b0db2ba39fa315ac82fe5f92d9b92cbc28c6"
+          }
+        },
+        {
           "client_id": "118753981156-c7m2ton7861gpf8m10kjcjdn8ver3i63.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
