@@ -108,7 +108,12 @@ class FirebaseService {
   }
 
   Future<void> completeGame(String gameId) async {
-    // @OTOD implement
+    var ref = _db.collection('games').document(gameId);
+    var game = (await ref.get()).data;
+    game['completed'] = true;
+    ref.setData({
+      'game': game,
+    }, merge: true);
   }
 
   int _calculatePoints(int oldPoints, int pointsToAdd) {

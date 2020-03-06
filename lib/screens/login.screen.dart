@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:yaniv/components/pill-button.component.dart';
 import 'package:yaniv/services/firebase.service.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,14 +19,34 @@ class LoginState extends State<LoginScreen> {
 
   @override
   build(BuildContext context) => Scaffold(
-        body: showIndicator
-            ? Center(child: CircularProgressIndicator())
-            : new Center(
-                child: new RaisedButton(
-                child: new Text('Sign in with google'),
-                onPressed: () => _handleLogin(context),
-              )),
-      );
+      backgroundColor: Colors.blue,
+      body: new Stack(fit: StackFit.expand, children: [
+        new Image(
+            fit: BoxFit.cover,
+            image: new AssetImage('assets/landing-backdrop.png')),
+        new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Image(
+              image: AssetImage('assets/logo.png'),
+            ),
+            new Container(
+                margin: new EdgeInsets.only(top: 80.0),
+                width: 300,
+                height: 60,
+                child: new PillButton(
+                  opacity: 0.7,
+                  child: new Text(
+                    'SIGN IN WITH GOOGLE',
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () => _handleLogin(context),
+                ))
+          ],
+        )
+      ]));
   _handleLogin(BuildContext context) async {
     setState(() {
       showIndicator = true;
