@@ -24,7 +24,7 @@ class PillButton extends StatelessWidget {
         child: new Opacity(
             opacity: opacity,
             child: new ClipRRect(
-                borderRadius: BorderRadius.all(const Radius.circular(32.0)),
+                borderRadius: BorderRadius.all(const Radius.circular(10.0)),
                 child: new Container(
                   decoration: new BoxDecoration(gradient: gradient),
                   child: new Center(child: child),

@@ -8,7 +8,7 @@ import 'package:yaniv/models/player.model.dart';
 import 'package:yaniv/services/firebase.service.dart';
 
 TextStyle header = new TextStyle(
-    fontSize: 18, fontWeight: FontWeight.normal, color: Colors.black);
+    fontSize: 18, fontWeight: FontWeight.normal, color: Colors.black, letterSpacing: 1);
 
 class GamesScreen extends StatelessWidget {
   final FirebaseService firebaseService = FirebaseService();
@@ -74,10 +74,10 @@ class GamesScreen extends StatelessWidget {
               },
               child: new Text(
                 'NEW GAME',
-                style: new TextStyle(color: Colors.white),
+                style: new TextStyle(color: Colors.white, letterSpacing: 1.3, fontWeight: FontWeight.w500, fontSize: 12),
               ),
               gradient:
-                  new LinearGradient(colors: [Colors.purple, Colors.blue]),
+                  new LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [const Color(0xFF5A7BEF), const Color(0xFF4048EF)]),
             ),
           ),
         ))
