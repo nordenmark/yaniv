@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:yaniv/models/game.model.dart';
 import 'package:faker/faker.dart';
 
@@ -112,12 +113,19 @@ class FirebaseService {
   }
 
   Future<void> completeGame(String gameId) async {
-    var ref = _db.collection('games').document(gameId);
-    var game = (await ref.get()).data;
-    game['completed'] = true;
-    ref.setData({
-      'game': game,
-    }, merge: true);
+    // @TODO fix this
+    // var ref = _db
+    //     .collection('games')
+    //     .document(email)
+    //     .collection('games')
+    //     .document(gameId);
+
+    // var game = (await ref.get()).data;
+
+    // game['completed'] = true;
+    // ref.setData({
+    //   'game': game,
+    // }, merge: true);
   }
 
   int _calculatePoints(int oldPoints, int pointsToAdd) {
@@ -131,7 +139,8 @@ class FirebaseService {
     return newPoints;
   }
 
-  Future<void> addPointsToPlayer(String gameId, String name, int points) async {
+  Future<void> addPointsToPlayers(
+      String gameId, Map<String, int> playerPoints) async {
     DocumentReference ref = _db
         .collection('games')
         .document(email)
@@ -140,16 +149,23 @@ class FirebaseService {
 
     int gameLength = (await ref.get()).data['gameLength'];
 
+    if (gameLength == null) {
+      gameLength = 200;
+    }
+
     List<dynamic> players = (await ref.get()).data['players'];
 
     players.forEach((player) {
-      if (player['name'] == name) {
-        int updatedPoints = _calculatePoints(player['points'], points);
-        if (updatedPoints > gameLength) {
-          completeGame(gameId);
-        }
-        player['points'] = updatedPoints;
+      if (!playerPoints.containsKey(player['name'])) {
+        return;
       }
+
+      int pointsThisRound = playerPoints[player['name']];
+      int updatedPoints = _calculatePoints(player['points'], pointsThisRound);
+      if (updatedPoints > gameLength) {
+        completeGame(gameId);
+      }
+      player['points'] = updatedPoints;
     });
 
     players.sort((a, b) => a['points'].compareTo(b['points']));

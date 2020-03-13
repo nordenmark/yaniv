@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaniv/components/add-player.component.dart';
+import 'package:yaniv/components/end-round.dialog.dart';
 import 'package:yaniv/components/pill-button.component.dart';
 
 import 'package:yaniv/components/players.component.dart';
@@ -41,14 +42,16 @@ class GameScreen extends StatelessWidget {
         });
   }
 
-  Widget header = Container(
-      height: 200,
-      child: Stack(fit: StackFit.expand, children: [
-        Image(
-            fit: BoxFit.cover,
-            image: new AssetImage('assets/game-background.jpeg')),
-        Row(children: [Text('a')]),
-      ]));
+  _getHeader() {
+    return Container(
+        height: 200,
+        child: Stack(fit: StackFit.expand, children: [
+          Image(
+              fit: BoxFit.cover,
+              image: new AssetImage('assets/game-background.jpeg')),
+          Row(children: [Text('a')]),
+        ]));
+  }
 
   _getPlayerList() {
     return Expanded(
@@ -75,7 +78,7 @@ class GameScreen extends StatelessWidget {
             }));
   }
 
-  _getFooter() {
+  _getFooter(BuildContext context) {
     TextStyle endGameStyle =
         TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.red);
     LinearGradient endGameGradient =
@@ -112,13 +115,22 @@ class GameScreen extends StatelessWidget {
                 width: 160,
                 child: PillButton(
                   onPressed: () {
-                    debugPrint('END ROUND!');
+                    debugPrint('gameId' + gameId);
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            EndRoundDialog(gameId: gameId));
+                    // // _showEndRoundDialog(context);
                   },
                   child: Text('END ROUND', style: endRoundStyle),
                   gradient: endRoundGradient,
                 )),
           ],
         ));
+  }
+
+  _showEndRoundDialog(BuildContext context) {
+    debugPrint('END ROUND!');
   }
 
   @override
@@ -128,6 +140,6 @@ class GameScreen extends StatelessWidget {
         body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [header, _getPlayerList(), _getFooter()]));
+            children: [_getHeader(), _getPlayerList(), _getFooter(context)]));
   }
 }
