@@ -46,7 +46,7 @@ class GamesComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      padding: const EdgeInsets.all(0),
+      padding: const EdgeInsets.only(bottom: 30),
       itemCount: games.length,
       separatorBuilder: (BuildContext context, int index) => const Divider(height: 0,),
       itemBuilder: (BuildContext context, int index) {
