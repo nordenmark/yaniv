@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-class PillButton extends StatelessWidget {
+class PillButton extends StatefulWidget {
   final LinearGradient gradient;
+  @required
   final Widget child;
+  @required
   final Function onPressed;
   final double opacity;
 
@@ -18,16 +20,30 @@ class PillButton extends StatelessWidget {
       this.opacity: 1.0});
 
   @override
+  State<StatefulWidget> createState() => new PillButtonState({});
+}
+
+class PillButtonState extends State<PillButton> {
+  final LinearGradient gradient;
+  @required
+  final Widget child;
+  @required
+  final Function onPressed;
+  final double opacity;
+
+  PillButtonState({this.gradient, this.child, this.onPressed, this.opacity});
+
+  @override
   build(BuildContext context) {
-    return new GestureDetector(
+    return GestureDetector(
         onTap: onPressed,
-        child: new Opacity(
+        child: Opacity(
             opacity: opacity,
-            child: new ClipRRect(
+            child: ClipRRect(
                 borderRadius: BorderRadius.all(const Radius.circular(32.0)),
-                child: new Container(
-                  decoration: new BoxDecoration(gradient: gradient),
-                  child: new Center(child: child),
+                child: Container(
+                  decoration: BoxDecoration(gradient: gradient),
+                  child: Center(child: child),
                 ))));
   }
 }

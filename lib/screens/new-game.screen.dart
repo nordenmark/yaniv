@@ -14,8 +14,8 @@ class NewGameScreenState extends State<NewGameScreen> {
   final _nameController = TextEditingController(text: '');
 
   final _headingStyle = TextStyle(fontSize: 12, letterSpacing: 1.2);
-  int _gameLength = 201;
-  List<int> lengthOptions = [101, 151, 201];
+  int _gameLength = 200;
+  List<int> lengthOptions = [100, 150, 200];
 
   String _isNotEmpty(String value) {
     if (value.isEmpty) {
@@ -42,10 +42,12 @@ class NewGameScreenState extends State<NewGameScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        'GAME NAME',
-                        style: _headingStyle,
-                      ),
+                      new Padding(
+                          padding: EdgeInsets.only(top: 16, bottom: 16),
+                          child: Text(
+                            'GAME NAME',
+                            style: _headingStyle,
+                          )),
                       TextFormField(
                         style: TextStyle(fontSize: 14),
                         decoration: InputDecoration(
@@ -56,7 +58,9 @@ class NewGameScreenState extends State<NewGameScreen> {
                         controller: _nameController,
                         validator: _isNotEmpty,
                       ),
-                      Text('GAME LENGTH', style: _headingStyle),
+                      new Padding(
+                          padding: EdgeInsets.only(top: 16, bottom: 16),
+                          child: Text('GAME LENGTH', style: _headingStyle)),
                       Expanded(
                           child: ListView(
                               children: List.generate(
@@ -117,7 +121,7 @@ class RadioWrapper extends StatelessWidget {
                       children: [
                     Text("Scoring limit of $value",
                         style: TextStyle(fontSize: 14)),
-                    Text('Game ends when a player reaches $value points',
+                    Text('Game ends when a player reaches ${value + 1} points',
                         style: TextStyle(fontSize: 8))
                   ])),
               new Radio(

@@ -69,7 +69,7 @@ class LoginState extends State<LoginScreen> {
       });
 
       firebaseService.setEmail(user.email);
-      Navigator.pushNamed(context, '/games');
+      Navigator.pushReplacementNamed(context, '/games');
     } catch (e) {
       setState(() {
         showIndicator = false;
