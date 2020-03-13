@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>118753981156-pe079j1p03r8ifh0i6su5i7rng59fslt.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.118753981156-pe079j1p03r8ifh0i6su5i7rng59fslt</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>118753981156-h8k6ppdvsd27eduemkn4gs1qircs1vev.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDkF50b3PnnYhvezOqRqf4wXS6ENdjWZq4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>118753981156</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.nordenshidi.yaniv</string>
+	<key>PROJECT_ID</key>
+	<string>yaniv-21766</string>
+	<key>STORAGE_BUCKET</key>
+	<string>yaniv-21766.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:118753981156:ios:5e8c607d5bd97a06d2b2f1</string>
+	<key>DATABASE_URL</key>
+	<string>https://yaniv-21766.firebaseio.com</string>
+</dict>
+</plist>

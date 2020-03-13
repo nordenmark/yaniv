@@ -21,21 +21,20 @@ class GamesScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        new Center(
-            child: new Padding(
+        Center(
+            child: Padding(
                 padding: const EdgeInsets.only(top: 80, bottom: 32),
-                child:
-                    new Image(image: new AssetImage('assets/logo-blue.png')))),
-        new Padding(
+                child: Image(image: AssetImage('assets/logo-blue.png')))),
+        Padding(
             padding: EdgeInsets.all(32),
             child: Text('Previous games', style: header)),
-        new Expanded(
-            child: new StreamBuilder(
+        Expanded(
+            child: StreamBuilder(
                 stream: firebaseService.getGames(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (!snapshot.hasData) {
-                    return new Center(child: new CircularProgressIndicator());
+                    return new Center(child: CircularProgressIndicator());
                   }
                   List<DocumentSnapshot> data = snapshot.data.documents;
                   List<Game> games = data.map((game) {
@@ -62,17 +61,17 @@ class GamesScreen extends StatelessWidget {
                     );
                   }
                 })),
-        new Center(
-            child: new Padding(
+        Center(
+            child: Padding(
           padding: EdgeInsets.only(top: 32, bottom: 32),
-          child: new Container(
+          child: Container(
             width: 300,
             height: 50,
-            child: new PillButton(
-              onPressed: () async {
-                await firebaseService.createNewGame();
+            child: PillButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/new-game');
               },
-              child: new Text(
+              child: Text(
                 'NEW GAME',
                 style: new TextStyle(color: Colors.white, letterSpacing: 1.3, fontWeight: FontWeight.w500, fontSize: 12),
               ),
