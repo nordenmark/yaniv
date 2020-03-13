@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaniv/components/add-player.component.dart';
+import 'package:yaniv/components/pill-button.component.dart';
 
 import 'package:yaniv/components/players.component.dart';
 import 'package:yaniv/helpers/hex-color.dart';
@@ -74,6 +75,52 @@ class GameScreen extends StatelessWidget {
             }));
   }
 
+  _getFooter() {
+    TextStyle endGameStyle =
+        TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.red);
+    LinearGradient endGameGradient =
+        LinearGradient(colors: [Colors.white, Colors.white]);
+
+    TextStyle endRoundStyle = TextStyle(
+        fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white);
+    LinearGradient endRoundGradient =
+        LinearGradient(colors: [Colors.purple[500], Colors.blue[700]]);
+
+    return Container(
+        height: 100,
+        padding: EdgeInsets.all(20.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border(
+            top: BorderSide(color: HexColor('#eeeeee'), width: 1.0),
+          ),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+                width: 160,
+                child: PillButton(
+                  onPressed: () {
+                    debugPrint('END GAME!');
+                  },
+                  child: Text('END GAME', style: endGameStyle),
+                  gradient: endGameGradient,
+                )),
+            Container(
+                width: 160,
+                child: PillButton(
+                  onPressed: () {
+                    debugPrint('END ROUND!');
+                  },
+                  child: Text('END ROUND', style: endRoundStyle),
+                  gradient: endRoundGradient,
+                )),
+          ],
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +128,6 @@ class GameScreen extends StatelessWidget {
         body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [header, _getPlayerList()]));
+            children: [header, _getPlayerList(), _getFooter()]));
   }
 }
