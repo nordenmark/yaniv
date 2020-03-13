@@ -77,12 +77,12 @@ class GameScreen extends StatelessWidget {
 
   _getFooter() {
     TextStyle endGameStyle =
-        TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.red);
+        TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.red);
     LinearGradient endGameGradient =
         LinearGradient(colors: [Colors.white, Colors.white]);
 
     TextStyle endRoundStyle = TextStyle(
-        fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white);
+        fontSize: 16, fontWeight: FontWeight.w400, color: Colors.white);
     LinearGradient endRoundGradient =
         LinearGradient(colors: [Colors.purple[500], Colors.blue[700]]);
 
