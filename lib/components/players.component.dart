@@ -1,65 +1,110 @@
 import 'package:flutter/material.dart';
+import 'package:yaniv/components/pill-button.component.dart';
+import 'package:yaniv/helpers/hex-color.dart';
 import 'package:yaniv/models/player.model.dart';
 import 'package:yaniv/services/firebase.service.dart';
+import 'package:yaniv/services/sound.service.dart';
+import 'package:yaniv/services/vibration.service.dart';
+
+TextStyle yanivButtonStyle =
+    TextStyle(fontSize: 11, fontWeight: FontWeight.w400, color: Colors.white);
 
 class PlayersComponent extends StatelessWidget {
   PlayersComponent({this.gameId, this.players});
 
   final FirebaseService firebaseService = FirebaseService();
+  final SoundService soundService = SoundService();
+  final VibrationService vibrationService = VibrationService();
   final List<Player> players;
   final String gameId;
 
-  void _handleTappedPlayer(Player player, BuildContext context) {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) => Container(
-                child: Padding(
-              padding: EdgeInsets.only(
-                  left: 16.0,
-                  right: 16.0,
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: new TextFormField(
-                autofocus: true,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  hintText: 'How many points?',
-                  labelText: 'Points',
-                ),
-                onFieldSubmitted: (String points) {
-                  firebaseService.addPointsToPlayer(
-                      gameId, player.name, int.parse(points));
-                  Navigator.of(context).pop();
-                },
-              ),
-            )));
+  // void _handleTappedPlayer(Player player, BuildContext context) {
+  //   showModalBottomSheet(
+  //       context: context,
+  //       builder: (context) => Container(
+  //               child: Padding(
+  //             padding: EdgeInsets.only(
+  //                 left: 16.0,
+  //                 right: 16.0,
+  //                 bottom: MediaQuery.of(context).viewInsets.bottom),
+  //             child: new TextFormField(
+  //               autofocus: true,
+  //               keyboardType: TextInputType.number,
+  //               decoration: const InputDecoration(
+  //                 hintText: 'How many points?',
+  //                 labelText: 'Points',
+  //               ),
+  //               onFieldSubmitted: (String points) {
+  //                 firebaseService.addPointsToPlayer(
+  //                     gameId, player.name, int.parse(points));
+  //                 Navigator.of(context).pop();
+  //               },
+  //             ),
+  //           )));
+  // }
+
+  void _onTappedYanivButton(Player player) {
+    debugPrint('On pressed yaniv button');
+    debugPrint(player.name);
+    soundService.yaniv();
+    vibrationService.vibrate();
+    // @TODO flashlight on and off?
+    // @TODO background color animation?
+  }
+
+  void _onTappedAssafButton(Player player) {
+    debugPrint('On pressed assaf button');
+    soundService.assaf();
+  }
+
+  Widget _playerButtonFactory(Player player) {
+    return PillButton(
+      onPressed: () {
+        _onTappedYanivButton(player);
+      },
+      child: Text('YANIV!', style: yanivButtonStyle),
+      gradient:
+          new LinearGradient(colors: [Colors.blue[500], Colors.blue[700]]),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(0.0),
       itemCount: players.length,
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
+      separatorBuilder: (BuildContext context, int index) => Divider(
+        height: 10.0,
+        color: HexColor('#f6f8fa'),
+      ),
       itemBuilder: (BuildContext context, int index) {
         Player player = players[index];
 
         return Container(
-            child: Dismissible(
-          key: Key(gameId),
-          direction: DismissDirection.endToStart,
-          onDismissed: (DismissDirection direction) {
-            firebaseService.removePlayerFromGame(gameId, player.name);
-          },
-          child: ListTile(
-            leading: Text(
-              player.points.toString(),
-              style: TextStyle(fontSize: 18.0),
-            ),
-            title: Text(player.name),
-            trailing: Icon(Icons.keyboard_arrow_right),
-            onTap: () => _handleTappedPlayer(player, context),
+          color: Colors.white,
+          padding:
+              EdgeInsets.only(left: 10.0, right: 10.0, top: 6.0, bottom: 6.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 40,
+                child: Text(player.points.toString()),
+              ),
+              Expanded(
+                  child: Row(children: [
+                Padding(
+                  padding: EdgeInsets.only(right: 10.0),
+                  child: Image(image: new AssetImage('assets/game-thumb.png')),
+                ),
+                Text(player.name),
+              ])),
+              Container(
+                  width: 60, height: 24, child: _playerButtonFactory(player))
+            ],
           ),
-        ));
+        );
       },
     );
   }
