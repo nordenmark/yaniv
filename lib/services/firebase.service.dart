@@ -50,6 +50,7 @@ class FirebaseService {
         .collection('games')
         .document(this.email)
         .collection('games')
+        .orderBy('createdAt', descending: true)
         .snapshots();
   }
 
