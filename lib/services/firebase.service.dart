@@ -53,7 +53,7 @@ class FirebaseService {
         .snapshots();
   }
 
-  Future<String> createNewGame() async {
+  Future<String> createNewGame({String name, int gameLength}) async {
     DocumentReference ref = await _db
         .collection('games')
         .document(this.email)
@@ -61,8 +61,9 @@ class FirebaseService {
         .add({
       'completed': false,
       'createdAt': Timestamp.now(),
+      'gameLength': gameLength,
       'players': [],
-      'name': faker.sport.name(),
+      'name': name,
     });
 
     return ref.documentID;
@@ -136,12 +137,14 @@ class FirebaseService {
         .collection('games')
         .document(gameId);
 
+    int gameLength = (await ref.get()).data['gameLength'];
+
     List<dynamic> players = (await ref.get()).data['players'];
 
     players.forEach((player) {
       if (player['name'] == name) {
         int updatedPoints = _calculatePoints(player['points'], points);
-        if (updatedPoints > 200) {
+        if (updatedPoints > gameLength) {
           completeGame(gameId);
         }
         player['points'] = updatedPoints;

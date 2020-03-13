@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yaniv/screens/game.screen.dart';
 import 'package:yaniv/screens/games.screen.dart';
 import 'package:yaniv/screens/login.screen.dart';
+import 'package:yaniv/screens/new-game.screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => LoginScreen(),
           '/games': (context) => GamesScreen(),
+          '/new-game': (context) => NewGameScreen(),
           '/game': (context) => GameScreen(),
         });
   }
