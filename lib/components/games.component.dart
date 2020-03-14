@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:yaniv/components/pill-button.component.dart';
 
@@ -45,10 +47,10 @@ class GamesComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    return ListView.builder(
       padding: const EdgeInsets.only(bottom: 30),
       itemCount: games.length,
-      separatorBuilder: (BuildContext context, int index) => const Divider(height: 0,),
+      //separatorBuilder: (BuildContext context, int index) => const Divider(height: 0,),
       itemBuilder: (BuildContext context, int index) {
         Game game = games[index];
 
@@ -110,6 +112,7 @@ class GamesComponent extends StatelessWidget {
                     width: 90,
                     height: 40,
                     child: new PillButton(
+                      
                       onPressed: () {
                         debugPrint('Not implemented yet');
                       },

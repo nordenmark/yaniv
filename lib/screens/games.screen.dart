@@ -25,9 +25,9 @@ class GamesScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        new Center(
+        new Container(
             child: new Padding(
-                padding: const EdgeInsets.only(top: 80, bottom: 32),
+                padding: const EdgeInsets.only(top: 60, bottom: 0, left: 30),
                 child:
                     new Image(image: new AssetImage('assets/logo-blue.png')))),
         new Padding(
@@ -72,23 +72,29 @@ class GamesScreen extends StatelessWidget {
                 })),
         new Center(
             child: new Container(
-          padding: EdgeInsets.only(top: 30, bottom: 30, left: 30, right: 30),
-          color: const Color(0xFFFFFFFF),
-          child: new Container(
-            height: 50,
-            child: new PillButton(
-              onPressed: () async {
-                await firebaseService.createNewGame();
-              },
-              child: new Text(
-                'NEW GAME',
-                style: new TextStyle(color: Colors.white, letterSpacing: 1.3, fontWeight: FontWeight.w500, fontSize: 14),
-              ),
-              gradient:
-                  new LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [const Color(0xFF5A7BEF), const Color(0xFF4048EF)]),
-            ),
-          ),
-        ))
+                decoration: const BoxDecoration(
+                    color: const Color(0xFFFFFFFF),
+                    border: Border(
+                        top: BorderSide(width: 1.0, color: Color(0xFFE9EAEB)),
+                    ),
+                ),
+                padding: EdgeInsets.only(top: 30, bottom: 30, left: 30, right: 30),
+                child: new Container(
+                    height: 50,
+                    child: new PillButton(
+                    onPressed: () async {
+                        await firebaseService.createNewGame();
+                    },
+                    child: new Text(
+                        'NEW GAME',
+                        style: new TextStyle(color: Colors.white, letterSpacing: 1.3, fontWeight: FontWeight.w500, fontSize: 14),
+                    ),
+                    gradient:
+                        new LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [const Color(0xFF5A7BEF), const Color(0xFF4048EF)]),
+                    ),
+                ),
+            )
+        )
       ],
     )]));
   }
