@@ -36,7 +36,6 @@ class LoginState extends State<LoginScreen> {
                 width: 300,
                 height: 60,
                 child: new PillButton(
-                  opacity: 0.7,
                   gradient: new LinearGradient(
                       colors: [Colors.blue[400], Colors.blue[100]]),
                   child: new Text(
@@ -69,7 +68,7 @@ class LoginState extends State<LoginScreen> {
       });
 
       firebaseService.setEmail(user.email);
-      Navigator.pushReplacementNamed(context, '/games');
+      Navigator.pushNamed(context, '/games');
     } catch (e) {
       setState(() {
         showIndicator = false;
