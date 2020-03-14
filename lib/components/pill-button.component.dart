@@ -80,7 +80,7 @@ class PillButtonState extends State<PillButton>
             child: Opacity(
                 opacity: opacity,
                 child: ClipRRect(
-                    borderRadius: BorderRadius.all(const Radius.circular(32.0)),
+                    borderRadius: BorderRadius.all(const Radius.circular(10.0)),
                     child: Container(
                       decoration: BoxDecoration(gradient: gradient),
                       child: Center(child: child),

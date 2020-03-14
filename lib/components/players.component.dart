@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaniv/components/pill-button.component.dart';
 import 'package:yaniv/components/yaniv-button.component.dart';
 import 'package:yaniv/helpers/hex-color.dart';
 import 'package:yaniv/models/player.model.dart';
@@ -40,6 +39,7 @@ class PlayersComponentState extends State<PlayersComponent> {
       this.playersWhoHaveCalledAssaf,
       this.playerWhoHasCalledYaniv});
 
+  /*
   Widget _yanivButton(Player player) {
     return PillButton(
       onPressed: () {
@@ -56,6 +56,7 @@ class PlayersComponentState extends State<PlayersComponent> {
           new LinearGradient(colors: [Colors.blue[500], Colors.blue[700]]),
     );
   }
+  */
 
   _playerRow(Player player) {
     return Container(
@@ -75,7 +76,7 @@ class PlayersComponentState extends State<PlayersComponent> {
               child: Row(children: [
             Padding(
               padding: EdgeInsets.only(right: 10.0),
-              child: Image(image: new AssetImage('assets/game-thumb.png')),
+              child: Image(image: AssetImage('assets/game-thumb.png')),
             ),
             Text(player.name, style: TextStyle(fontSize: 16)),
           ])),

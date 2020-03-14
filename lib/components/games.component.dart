@@ -7,9 +7,9 @@ import 'package:yaniv/screens/game.screen.dart';
 import 'package:intl/intl.dart';
 
 TextStyle gameNameStyle =
-    new TextStyle(fontSize: 16, fontWeight: FontWeight.w100);
+    new TextStyle(fontSize: 15, fontWeight: FontWeight.w600);
 TextStyle playerHeadingStyle =
-    new TextStyle(fontSize: 11, fontWeight: FontWeight.bold);
+    new TextStyle(fontSize: 12, fontWeight: FontWeight.w500);
 TextStyle rematchStyle = new TextStyle(
     fontSize: 11, fontWeight: FontWeight.w400, color: Colors.white);
 
@@ -21,7 +21,10 @@ class GamesComponent extends StatelessWidget {
   Text _playersToListTitle(List<Player> players) {
     if (players.length == 0) {
       return Text('No players added...',
-          style: TextStyle(fontStyle: FontStyle.italic));
+          style: TextStyle(
+              fontSize: 12,
+              fontStyle: FontStyle.normal,
+              color: const Color(0xFF6C7B8A)));
     }
 
     String title = players.map((Player player) {
@@ -30,7 +33,7 @@ class GamesComponent extends StatelessWidget {
 
     return Text(
       title,
-      style: TextStyle(fontSize: 11, color: Colors.grey),
+      style: TextStyle(fontSize: 12, color: Colors.grey),
     );
   }
 
@@ -45,58 +48,96 @@ class GamesComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: const EdgeInsets.all(8.0),
+    return ListView.builder(
+      padding: const EdgeInsets.only(bottom: 30),
       itemCount: games.length,
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
+      //separatorBuilder: (BuildContext context, int index) => const Divider(height: 0,),
       itemBuilder: (BuildContext context, int index) {
         Game game = games[index];
 
         return Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/row-background.png'),
+          )),
+          padding:
+              const EdgeInsets.only(top: 0, bottom: 0, right: 30, left: 30),
           child: new Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              new Center(
-                  child: new Padding(
-                      padding: new EdgeInsets.all(16),
+              new Container(
+                  width: 60,
+                  height: 70,
+                  padding: new EdgeInsets.only(right: 0),
+                  child: new ClipRRect(
+                      borderRadius:
+                          BorderRadius.all(const Radius.circular(10.0)),
                       child: Image(
-                          image: new AssetImage('assets/game-thumb.png')))),
+                        image: new AssetImage('assets/game-thumb.png'),
+                        fit: BoxFit.cover,
+                      ))),
               new Expanded(
-                  child: new Padding(
-                      padding: new EdgeInsets.only(left: 16, right: 16),
-                      child: new Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            new GestureDetector(
-                                onTap: () => _handleTappedGame(context, game),
-                                child: new Padding(
-                                    padding: EdgeInsets.only(bottom: 8),
-                                    child: Text(
-                                      game.name,
-                                      style: gameNameStyle,
-                                    ))),
-                            new Padding(
-                                padding: EdgeInsets.only(bottom: 8),
-                                child: new Text('Players',
-                                    style: playerHeadingStyle)),
-                            _playersToListTitle(game.players)
-                          ]))),
+                  child: new ClipRRect(
+                      borderRadius:
+                          BorderRadius.all(const Radius.circular(10.0)),
+                      child: new Container(
+                          padding: new EdgeInsets.only(
+                              top: 25, bottom: 25, left: 20, right: 15),
+                          child: new Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                new GestureDetector(
+                                    onTap: () =>
+                                        _handleTappedGame(context, game),
+                                    child: new Padding(
+                                        padding: EdgeInsets.only(bottom: 2),
+                                        child: Text(
+                                          game.name,
+                                          style: new TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            letterSpacing: 0.5,
+                                          ),
+                                        ))),
+                                new Text(
+                                  new DateFormat('yMMMMd')
+                                      .format(game.createdAt.toDate()),
+                                  style: new TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 12,
+                                      color: const Color(0xFF6C7B8A)),
+                                ),
+                                new Container(
+                                    padding: EdgeInsets.only(bottom: 0, top: 8),
+                                    child: new Text(
+                                      'Players',
+                                      style: new TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600),
+                                    )),
+                                _playersToListTitle(game.players)
+                              ])))),
               new Column(children: [
-                new Text(
-                    new DateFormat('yMMMMd').format(game.createdAt.toDate())),
                 new Container(
-                    margin: new EdgeInsets.only(top: 16),
-                    width: 100,
-                    height: 30,
+                    margin: new EdgeInsets.only(top: 0),
+                    width: 90,
+                    height: 40,
                     child: new PillButton(
                       onPressed: () {
                         debugPrint('Not implemented yet');
                       },
-                      child: new Text('REMATCH', style: rematchStyle),
-                      gradient: new LinearGradient(
-                          colors: [Colors.blue[500], Colors.blue[700]]),
+                      child: new Text('REMATCH',
+                          style: new TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 1,
+                              color: const Color(0xFFFFFFFF))),
+                      gradient: new LinearGradient(colors: [
+                        const Color(0xFF5A7BEF),
+                        const Color(0xFF4048EF)
+                      ]),
                     ))
               ]),
             ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaniv/components/add-player.component.dart';
 import 'package:yaniv/components/end-round.dialog.dart';
 import 'package:yaniv/components/pill-button.component.dart';
 
@@ -14,6 +13,7 @@ class GameScreen extends StatelessWidget {
 
   GameScreen({this.gameId});
 
+  /*
   _showDeleteConfirmation(BuildContext context) async {
     showDialog(
         context: context,
@@ -41,6 +41,7 @@ class GameScreen extends StatelessWidget {
           );
         });
   }
+  */
 
   _getHeader() {
     return Container(
@@ -120,7 +121,7 @@ class GameScreen extends StatelessWidget {
                         context: context,
                         builder: (BuildContext context) =>
                             EndRoundDialog(gameId: gameId));
-                    // // _showEndRoundDialog(context);
+                    _showEndRoundDialog(context);
                   },
                   child: Text('END ROUND', style: endRoundStyle),
                   gradient: endRoundGradient,

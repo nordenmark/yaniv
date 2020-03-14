@@ -14,7 +14,6 @@ class AddPlayerState extends State<AddPlayer> {
   final FirebaseService firebaseService = FirebaseService();
   final String gameId;
 
-  final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
 
   AddPlayerState({this.gameId});
