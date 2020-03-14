@@ -8,7 +8,7 @@ import 'package:yaniv/models/player.model.dart';
 import 'package:yaniv/services/firebase.service.dart';
 
 TextStyle header = new TextStyle(
-    fontSize: 18, fontWeight: FontWeight.normal, color: Colors.black, letterSpacing: 1);
+    fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black);
 
 class GamesScreen extends StatelessWidget {
   final FirebaseService firebaseService = FirebaseService();
@@ -16,20 +16,29 @@ class GamesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        body: new Column(
+    return new Scaffold (
+        body: new Stack(fit: StackFit.expand, children: [
+        new Image(
+            fit: BoxFit.cover,
+            image: new AssetImage('assets/main-background.png')),
+            new Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(
-            child: Padding(
-                padding: const EdgeInsets.only(top: 80, bottom: 32),
-                child: Image(image: AssetImage('assets/logo-blue.png')))),
-        Padding(
-            padding: EdgeInsets.all(32),
-            child: Text('Previous games', style: header)),
-        Expanded(
-            child: StreamBuilder(
+        new Container(
+            child: new Padding(
+                padding: const EdgeInsets.only(top: 60, bottom: 0, left: 30),
+                child:
+                    new Image(image: new AssetImage('assets/logo-blue.png')))),
+        new Padding(
+            padding: EdgeInsets.only(top: 30, bottom: 15, left: 30, right: 30),
+            child: Text('Previous games', 
+                style: new TextStyle(
+    fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black),
+            )
+        ),
+        new Expanded(
+            child: new StreamBuilder(
                 stream: firebaseService.getGames(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -61,26 +70,32 @@ class GamesScreen extends StatelessWidget {
                     );
                   }
                 })),
-        Center(
-            child: Padding(
-          padding: EdgeInsets.only(top: 32, bottom: 32),
-          child: Container(
-            width: 300,
-            height: 50,
-            child: PillButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/new-game');
-              },
-              child: Text(
-                'NEW GAME',
-                style: new TextStyle(color: Colors.white, letterSpacing: 1.3, fontWeight: FontWeight.w500, fontSize: 12),
-              ),
-              gradient:
-                  new LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [const Color(0xFF5A7BEF), const Color(0xFF4048EF)]),
-            ),
-          ),
-        ))
+        new Center(
+            child: new Container(
+                decoration: const BoxDecoration(
+                    color: const Color(0xFFFFFFFF),
+                    border: Border(
+                        top: BorderSide(width: 1.0, color: Color(0xFFE9EAEB)),
+                    ),
+                ),
+                padding: EdgeInsets.only(top: 30, bottom: 30, left: 30, right: 30),
+                child: new Container(
+                    height: 50,
+                    child: new PillButton(
+                    onPressed: () async {
+                        await firebaseService.createNewGame();
+                    },
+                    child: new Text(
+                        'NEW GAME',
+                        style: new TextStyle(color: Colors.white, letterSpacing: 1.3, fontWeight: FontWeight.w500, fontSize: 14),
+                    ),
+                    gradient:
+                        new LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [const Color(0xFF5A7BEF), const Color(0xFF4048EF)]),
+                    ),
+                ),
+            )
+        )
       ],
-    ));
+    )]));
   }
 }
