@@ -43,7 +43,7 @@ class GamesScreen extends StatelessWidget {
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (!snapshot.hasData) {
-                    return new Center(child: new CircularProgressIndicator());
+                    return new Center(child: CircularProgressIndicator());
                   }
                   List<DocumentSnapshot> data = snapshot.data.documents;
                   List<Game> games = data.map((game) {
