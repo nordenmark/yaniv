@@ -19,7 +19,7 @@ class LoginState extends State<LoginScreen> {
 
   @override
   build(BuildContext context) => Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
       body: new Stack(fit: StackFit.expand, children: [
         new Image(
             fit: BoxFit.cover,
@@ -28,17 +28,50 @@ class LoginState extends State<LoginScreen> {
 
         new Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             new Container(
-                margin: new EdgeInsets.only(top: 150.0),
+                width: 100,
+                padding: EdgeInsets.only(top: 0, bottom: 0, left: 30, right: 0),
+                margin: new EdgeInsets.only(top: 100.0),
                 child: const Image(
-                    image: AssetImage('assets/logo.png'),
+                    image: AssetImage('assets/yaniv-google-store.png'),
+                ),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(const Radius.circular(10.0)),
                 ),
             ),
+
+            Container(
+                padding: EdgeInsets.only(top: 50, bottom: 0, left: 30, right: 0),
+                child: Text(
+                    "Let's play Yaniv!",
+                    style: const TextStyle(
+                        color: Colors.white, 
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0,
+                        fontSize: 32.0,
+                    ),
+                ),
+            ),
+
+            Container(
+                padding: EdgeInsets.only(top: 10, bottom: 0, left: 30, right: 0),
+                child: Text(
+                    "Enter your details below",
+                    style: const TextStyle(
+                        color: Colors.white, 
+                        fontWeight: FontWeight.w200,
+                        letterSpacing: 0,
+                        fontSize: 16.0,
+                    ),
+                ),
+            ),
+
             new Container(
-                margin: new EdgeInsets.only(top: 60.0, left: 30, right: 30),
-                padding: EdgeInsets.only(top: 0, bottom: 0, left: 8, right: 10),
+                margin: new EdgeInsets.only(top: 30.0, left: 30, right: 30),
+                padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
+                height: 50,
                 child: TextField(
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(
@@ -46,26 +79,20 @@ class LoginState extends State<LoginScreen> {
                     ),
                     decoration: InputDecoration(
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(top: 14.0),
-                        prefixIcon: Icon(
-                            Icons.email,
-                            color: Colors.white,
-                            size: 18.0,
-                        ),
-                        hintText: 'Enter your Email',
+                        hintText: 'Email address',
                         hintStyle: TextStyle(
                             color: Color(0xB3FFFFFF),
-                            fontSize: 12.0,
+                            fontSize: 14.0,
                         ),
                     ),
                 ),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(const Radius.circular(5.0)),
                     border: Border(
-                        top: BorderSide(width: 1.0, color: Color(0x4DFFFFFF)),
-                        bottom: BorderSide(width: 1.0, color: Color(0x4DFFFFFF)),
-                        left: BorderSide(width: 1.0, color: Color(0x4DFFFFFF)),
-                        right: BorderSide(width: 1.0, color: Color(0x4DFFFFFF)),
+                        top: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
+                        bottom: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
+                        left: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
+                        right: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
                     ),
                     color: Color(0x0DFFFFFF),
                 ),
@@ -73,7 +100,8 @@ class LoginState extends State<LoginScreen> {
 
             new Container(
                 margin: new EdgeInsets.only(top: 10.0, left: 30, right: 30),
-                padding: EdgeInsets.only(top: 0, bottom: 0, left: 8, right: 10),
+                padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
+                height: 50,
                 child: TextField(
                     obscureText: true,
                     style: TextStyle(
@@ -81,76 +109,76 @@ class LoginState extends State<LoginScreen> {
                     ),
                     decoration: InputDecoration(
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(top: 14.0),
-                        prefixIcon: Icon(
-                            Icons.lock,
-                            color: Colors.white,
-                            size: 18.0,
-                        ),
-                        hintText: 'Enter your Email',
+                        hintText: 'Password',
                         hintStyle: TextStyle(
                             color: Color(0xB3FFFFFF),
-                            fontSize: 12.0,
+                            fontSize: 14.0,
                         ),
                     ),
                 ),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(const Radius.circular(5.0)),
                     border: Border(
-                        top: BorderSide(width: 1.0, color: Color(0x4DFFFFFF)),
-                        bottom: BorderSide(width: 1.0, color: Color(0x4DFFFFFF)),
-                        left: BorderSide(width: 1.0, color: Color(0x4DFFFFFF)),
-                        right: BorderSide(width: 1.0, color: Color(0x4DFFFFFF)),
+                        top: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
+                        bottom: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
+                        left: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
+                        right: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
                     ),
                     color: Color(0x0DFFFFFF),
                 ),
             ),
 
             Container(
-                margin: new EdgeInsets.only(top: 0.0, left: 30, right: 30),
-                padding: EdgeInsets.symmetric(vertical: 25.0),
-                width: double.infinity,
-                child: RaisedButton(
-                    elevation: 5.0,
-                    onPressed: () => print('Login Button Pressed'),
-                    padding: EdgeInsets.all(20.0),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                margin: new EdgeInsets.only(top: 20.0, left: 30, right: 30, bottom: 20.0),
+                height: 60,
+                child: new PillButton(
+                  gradient: new LinearGradient(
+                      colors: [const Color(0xFF5A7BEF), const Color(0xFF5A7BEF)]),
+                  child: new Text(
+                    'SIGN IN',
+                    style: const TextStyle(
+                        color: Colors.white, 
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1,
+                        fontSize: 12.0,
                     ),
-                    color: Colors.white,
-                    child: Text(
-                        'LOGIN',
-                        style: TextStyle(
-                            color: Color(0xFF527DAA),
-                            letterSpacing: 1,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.bold,
-                        ),
-                    ),
+                  ),
+                  onPressed: () => print('Login Button Pressed'),
                 ),
             ),
 
-          Container(
-                margin: new EdgeInsets.only(top: 10.0, left: 30, right: 30),
-                padding: EdgeInsets.symmetric(vertical: 25.0),
-                child: Text(
-                  '- OR -',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
+            Container(
+                margin: new EdgeInsets.only(top: 0.0, left: 30, right: 30, bottom: 0.0),
+                child: GestureDetector(
+                onTap: () => print('Forgot password Button Pressed'),
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Forgot your password? ',
+                        style: TextStyle(
+                          color: Colors.white,
+                          letterSpacing: 0.5,
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-            ),
+              ),
+              ),
 
           ],
 
         ),
         new Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             new Container(
-                margin: new EdgeInsets.only(top: 0.0, left: 30, right: 30, bottom: 30.0),
+                margin: new EdgeInsets.only(top: 0.0, left: 30, right: 30, bottom: 20.0),
                 height: 60,
                 child: new PillButton(
                   gradient: new LinearGradient(
@@ -158,10 +186,18 @@ class LoginState extends State<LoginScreen> {
                   child: new Text(
                     'SIGN IN WITH GOOGLE',
                     style: const TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                        color: Colors.white, 
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1,
+                        fontSize: 12.0,
+                        ),
                   ),
                   onPressed: () => _handleLogin(context),
-                )),
+                ),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(const Radius.circular(10.0)),
+                ),
+            ),
 
                 Container(
                 margin: new EdgeInsets.only(top: 0.0, left: 30, right: 30, bottom: 40.0),
@@ -175,7 +211,7 @@ class LoginState extends State<LoginScreen> {
                         style: TextStyle(
                           color: Colors.white,
                           letterSpacing: 0.5,
-                          fontSize: 14.0,
+                          fontSize: 12.0,
                           fontWeight: FontWeight.w400,
                           fontFamily: 'Montserrat',
                         ),
@@ -185,7 +221,7 @@ class LoginState extends State<LoginScreen> {
                         style: TextStyle(
                           color: Colors.white,
                           letterSpacing: 0.5,
-                          fontSize: 14.0,
+                          fontSize: 12.0,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Montserrat',
                         ),
