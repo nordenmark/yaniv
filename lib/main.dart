@@ -3,6 +3,7 @@ import 'package:yaniv/screens/game.screen.dart';
 import 'package:yaniv/screens/games.screen.dart';
 import 'package:yaniv/screens/login.screen.dart';
 import 'package:yaniv/screens/new-game.screen.dart';
+import 'package:yaniv/screens/signup.screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
           '/games': (context) => GamesScreen(),
           '/new-game': (context) => NewGameScreen(),
           '/game': (context) => GameScreen(),
+          '/signup': (context) => SignupScreen(),
         });
   }
 }

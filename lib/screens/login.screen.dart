@@ -172,39 +172,14 @@ class LoginState extends State<LoginScreen> {
               ),
               ),
 
-          ],
-
-        ),
-        new Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            new Container(
-                margin: new EdgeInsets.only(top: 0.0, left: 30, right: 30, bottom: 20.0),
-                height: 60,
-                child: new PillButton(
-                  gradient: new LinearGradient(
-                      colors: [const Color(0x4DFFFFFF), const Color(0x4DFFFFFF)]),
-                  child: new Text(
-                    'SIGN IN WITH GOOGLE',
-                    style: const TextStyle(
-                        color: Colors.white, 
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1,
-                        fontSize: 12.0,
-                        ),
-                  ),
-                  onPressed: () => _handleLogin(context),
-                ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(const Radius.circular(10.0)),
-                ),
-            ),
-
-                Container(
-                margin: new EdgeInsets.only(top: 0.0, left: 30, right: 30, bottom: 40.0),
+              Container(
+                margin: new EdgeInsets.only(top: 20.0, left: 30, right: 30, bottom: 40.0),
                 child: GestureDetector(
-                onTap: () => print('Sign Up Button Pressed'),
+                //onTap: () => print('Sign Up Button Pressed'),
+                onTap: () {
+                  // Navigate to the second screen using a named route.
+                  Navigator.pushNamed(context, '/signup');
+                },
                 child: RichText(
                   text: TextSpan(
                     children: [
@@ -233,6 +208,36 @@ class LoginState extends State<LoginScreen> {
                 ),
               ),
               )
+
+          ],
+
+        ),
+        new Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            new Container(
+                margin: new EdgeInsets.only(top: 0.0, left: 30, right: 30, bottom: 40.0),
+                height: 60,
+                child: new PillButton(
+                  gradient: new LinearGradient(
+                      colors: [const Color(0x4DFFFFFF), const Color(0x4DFFFFFF)]),
+                  child: new Text(
+                    'SIGN IN WITH GOOGLE',
+                    style: const TextStyle(
+                        color: Colors.white, 
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1,
+                        fontSize: 12.0,
+                        ),
+                  ),
+                  onPressed: () => _handleLogin(context),
+                ),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(const Radius.circular(10.0)),
+                ),
+            ),
+
           ],
         )
       ]));
