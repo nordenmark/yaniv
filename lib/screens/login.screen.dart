@@ -19,6 +19,8 @@ class LoginState extends State<LoginScreen> {
 
   @override
   build(BuildContext context) => Scaffold(
+      // "resizeToAvoidBottomInset" Stops keyboard from pushing content from bottom
+      resizeToAvoidBottomInset : false,
       backgroundColor: Colors.white,
       body: new Stack(fit: StackFit.expand, children: [
         new Image(
@@ -31,9 +33,9 @@ class LoginState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             new Container(
-                width: 100,
+                width: 90,
                 padding: EdgeInsets.only(top: 0, bottom: 0, left: 30, right: 0),
-                margin: new EdgeInsets.only(top: 100.0),
+                margin: new EdgeInsets.only(top: 90.0),
                 child: const Image(
                     image: AssetImage('assets/yaniv-google-store.png'),
                 ),
