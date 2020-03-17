@@ -25,8 +25,6 @@ class SignupScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-          
-
             Container(
                 width:30,
                 margin: new EdgeInsets.only(top: 110.0, left: 30, right: 30, bottom: 0.0),
@@ -71,7 +69,7 @@ class SignupScreen extends StatelessWidget {
             new Container(
                 margin: new EdgeInsets.only(top: 30.0, left: 30, right: 30),
                 padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
-                height: 50,
+                height: 52,
                 child: TextField(
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(
@@ -79,10 +77,12 @@ class SignupScreen extends StatelessWidget {
                     ),
                     decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'User name',
+                        hintText: 'USER NAME',
                         hintStyle: TextStyle(
                             color: Color(0xB3FFFFFF),
-                            fontSize: 14.0,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1,
                         ),
                     ),
                 ),
@@ -101,7 +101,7 @@ class SignupScreen extends StatelessWidget {
             new Container(
                 margin: new EdgeInsets.only(top: 10.0, left: 30, right: 30),
                 padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
-                height: 50,
+                height: 52,
                 child: TextField(
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(
@@ -109,10 +109,12 @@ class SignupScreen extends StatelessWidget {
                     ),
                     decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Email address',
+                        hintText: 'EMAIL ADDRESS',
                         hintStyle: TextStyle(
                             color: Color(0xB3FFFFFF),
-                            fontSize: 14.0,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1,
                         ),
                     ),
                 ),
@@ -131,7 +133,7 @@ class SignupScreen extends StatelessWidget {
             new Container(
                 margin: new EdgeInsets.only(top: 10.0, left: 30, right: 30),
                 padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
-                height: 50,
+                height: 52,
                 child: TextField(
                     obscureText: true,
                     style: TextStyle(
@@ -139,10 +141,12 @@ class SignupScreen extends StatelessWidget {
                     ),
                     decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Password',
+                        hintText: 'PASSWORD',
                         hintStyle: TextStyle(
                             color: Color(0xB3FFFFFF),
-                            fontSize: 14.0,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1,
                         ),
                     ),
                 ),
