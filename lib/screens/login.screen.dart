@@ -35,7 +35,7 @@ class LoginState extends State<LoginScreen> {
             new Container(
                 width: 90,
                 padding: EdgeInsets.only(top: 0, bottom: 0, left: 30, right: 0),
-                margin: new EdgeInsets.only(top: 90.0),
+                margin: new EdgeInsets.only(top: 75.0),
                 child: const Image(
                     image: AssetImage('assets/yaniv-google-store.png'),
                 ),
@@ -45,14 +45,14 @@ class LoginState extends State<LoginScreen> {
             ),
 
             Container(
-                padding: EdgeInsets.only(top: 50, bottom: 0, left: 30, right: 0),
+                padding: EdgeInsets.only(top: 30, bottom: 0, left: 30, right: 30),
                 child: Text(
                     "Let's play Yaniv!",
                     style: const TextStyle(
                         color: Colors.white, 
                         fontWeight: FontWeight.w600,
                         letterSpacing: 0,
-                        fontSize: 32.0,
+                        fontSize: 30.0,
                     ),
                 ),
             ),
@@ -71,7 +71,7 @@ class LoginState extends State<LoginScreen> {
             ),
 
             new Container(
-                margin: new EdgeInsets.only(top: 30.0, left: 30, right: 30),
+                margin: new EdgeInsets.only(top: 20.0, left: 30, right: 30),
                 padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
                 height: 52,
                 child: TextField(
@@ -91,7 +91,10 @@ class LoginState extends State<LoginScreen> {
                     ),
                 ),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(const Radius.circular(5.0)),
+                    borderRadius: BorderRadius.only(
+                        topLeft: const Radius.circular(5.0), 
+                        topRight: const Radius.circular(5.0)
+                    ),
                     border: Border(
                         top: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
                         bottom: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
@@ -103,7 +106,7 @@ class LoginState extends State<LoginScreen> {
             ),
 
             new Container(
-                margin: new EdgeInsets.only(top: 10.0, left: 30, right: 30),
+                margin: new EdgeInsets.only(top: 0.0, left: 30, right: 30),
                 padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
                 height: 52,
                 child: TextField(
@@ -123,7 +126,10 @@ class LoginState extends State<LoginScreen> {
                     ),
                 ),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(const Radius.circular(5.0)),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: const Radius.circular(5.0), 
+                        bottomRight: const Radius.circular(5.0)
+                    ),
                     border: Border(
                         top: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
                         bottom: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),

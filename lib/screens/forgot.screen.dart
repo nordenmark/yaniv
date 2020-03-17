@@ -27,7 +27,7 @@ class ForgotScreen extends StatelessWidget {
 
             Container(
                 width:30,
-                margin: new EdgeInsets.only(top: 110.0, left: 30, right: 30, bottom: 0.0),
+                margin: new EdgeInsets.only(top: 95.0, left: 30, right: 30, bottom: 0.0),
                 child: GestureDetector(
                 //onTap: () => print('Forgot password Button Pressed'),
                 onTap: () {
@@ -41,7 +41,7 @@ class ForgotScreen extends StatelessWidget {
               ),
 
             Container(
-                padding: EdgeInsets.only(top: 50, bottom: 0, left: 30, right: 0),
+                padding: EdgeInsets.only(top: 40, bottom: 0, left: 30, right: 30),
                 child: Text(
                     "Forgot your password?",
                     style: const TextStyle(
@@ -54,7 +54,7 @@ class ForgotScreen extends StatelessWidget {
             ),
 
             Container(
-                padding: EdgeInsets.only(top: 10, bottom: 0, left: 30, right: 0),
+                padding: EdgeInsets.only(top: 10, bottom: 0, left: 30, right: 30),
                 child: Text(
                     "We'll help you reset it and get you into the game!",
                     style: const TextStyle(
@@ -67,7 +67,7 @@ class ForgotScreen extends StatelessWidget {
             ),
 
             new Container(
-                margin: new EdgeInsets.only(top: 30.0, left: 30, right: 30),
+                margin: new EdgeInsets.only(top: 20.0, left: 30, right: 30),
                 padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
                 height: 52,
                 child: TextField(

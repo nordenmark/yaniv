@@ -27,7 +27,7 @@ class SignupScreen extends StatelessWidget {
 
             Container(
                 width:30,
-                margin: new EdgeInsets.only(top: 110.0, left: 30, right: 30, bottom: 0.0),
+                margin: new EdgeInsets.only(top: 95.0, left: 30, right: 30, bottom: 0.0),
                 child: GestureDetector(
                 //onTap: () => print('Forgot password Button Pressed'),
                 onTap: () {
@@ -41,7 +41,7 @@ class SignupScreen extends StatelessWidget {
               ),
 
             Container(
-                padding: EdgeInsets.only(top: 50, bottom: 0, left: 30, right: 0),
+                padding: EdgeInsets.only(top: 40, bottom: 0, left: 30, right: 0),
                 child: Text(
                     "Join the fun!",
                     style: const TextStyle(
@@ -67,7 +67,7 @@ class SignupScreen extends StatelessWidget {
             ),
 
             new Container(
-                margin: new EdgeInsets.only(top: 30.0, left: 30, right: 30),
+                margin: new EdgeInsets.only(top: 20.0, left: 30, right: 30),
                 padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
                 height: 52,
                 child: TextField(
@@ -87,7 +87,10 @@ class SignupScreen extends StatelessWidget {
                     ),
                 ),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(const Radius.circular(5.0)),
+                    borderRadius: BorderRadius.only(
+                        topLeft: const Radius.circular(5.0), 
+                        topRight: const Radius.circular(5.0)
+                    ),
                     border: Border(
                         top: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
                         bottom: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
@@ -99,7 +102,7 @@ class SignupScreen extends StatelessWidget {
             ),
 
             new Container(
-                margin: new EdgeInsets.only(top: 10.0, left: 30, right: 30),
+                margin: new EdgeInsets.only(top: 0.0, left: 30, right: 30),
                 padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
                 height: 52,
                 child: TextField(
@@ -119,7 +122,6 @@ class SignupScreen extends StatelessWidget {
                     ),
                 ),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(const Radius.circular(5.0)),
                     border: Border(
                         top: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
                         bottom: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
@@ -131,7 +133,7 @@ class SignupScreen extends StatelessWidget {
             ),
 
             new Container(
-                margin: new EdgeInsets.only(top: 10.0, left: 30, right: 30),
+                margin: new EdgeInsets.only(top: 0.0, left: 30, right: 30),
                 padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
                 height: 52,
                 child: TextField(
@@ -151,7 +153,10 @@ class SignupScreen extends StatelessWidget {
                     ),
                 ),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(const Radius.circular(5.0)),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: const Radius.circular(5.0), 
+                        bottomRight: const Radius.circular(5.0)
+                    ),
                     border: Border(
                         top: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
                         bottom: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
