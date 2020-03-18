@@ -6,6 +6,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:yaniv/components/pill-button.component.dart';
 import 'package:yaniv/services/firebase.service.dart';
 import 'package:yaniv/services/auth.service.dart';
+import 'package:yaniv/shared/constants.dart';
+import 'package:yaniv/shared/loading.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -20,24 +22,25 @@ class LoginState extends State<LoginScreen> {
 
   final AuthService _yauth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   // email text field state
   bool _autoValidate = false;
   String email = '';
   String password = '';
-  String error = '';
+  String error = "Enter your details below";
   String validateEmail(String value) {
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value))
-      return 'Enter Valid Email';
+      return 'Assaf! Enter a valid email!';
     else
       return null;
   }
 
   @override
-  build(BuildContext context) => Scaffold(
+  build(BuildContext context) { return loading ? LoadingAnimation() : Scaffold(
       // "resizeToAvoidBottomInset" Stops keyboard from pushing content from bottom
       resizeToAvoidBottomInset : false,
       backgroundColor: Colors.white,
@@ -94,7 +97,7 @@ class LoginState extends State<LoginScreen> {
                       Container(
                           padding: EdgeInsets.only(top: 10, bottom: 0, left: 30, right: 0),
                           child: Text(
-                              "Enter your details below",
+                              error,
                               style: const TextStyle(
                                   color: Colors.white, 
                                   fontWeight: FontWeight.w200,
@@ -112,58 +115,20 @@ class LoginState extends State<LoginScreen> {
                               child: Column(
                                   children: <Widget>[
                                       TextFormField(
+                                        style: new TextStyle(color: Colors.white, fontSize: 14),
                                         keyboardType: TextInputType.emailAddress,
                                         validator: validateEmail,
-                                        decoration: InputDecoration(
-                                            fillColor: const Color(0x1AFFFFFF),
-                                            filled: true,
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: const Color(0x4DFFFFFF),
-                                              )
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: const Color(0xFFFFFFFF),
-                                              )
-                                            ),
-                                            hintText: 'EMAIL ADDRESS',
-                                            hintStyle: TextStyle(
-                                                color: Color(0xB3FFFFFF),
-                                                fontSize: 12.0,
-                                                fontWeight: FontWeight.w500,
-                                                letterSpacing: 1,
-                                            ),
-                                        ),
+                                        decoration: textInputDecoration.copyWith(hintText: 'EMAIL'),
                                         onChanged: (val) {
                                             setState(() => email = val);
                                         },
                                       ),
                                       SizedBox(height: 10),
                                       TextFormField(
+                                          style: new TextStyle(color: Colors.white, fontSize: 14),
                                           validator: (val) => val.length < 6 ? "Your password needs to be 6 chars or longer!" : null,
                                           obscureText: true,
-                                          decoration: InputDecoration(
-                                            fillColor: const Color(0x1AFFFFFF),
-                                            filled: true,
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: const Color(0x4DFFFFFF),
-                                              )
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: const Color(0xFFFFFFFF),
-                                              )
-                                            ),
-                                              hintText: 'PASSWORD',
-                                              hintStyle: TextStyle(
-                                                  color: Color(0xB3FFFFFF),
-                                                  fontSize: 12.0,
-                                                  fontWeight: FontWeight.w500,
-                                                  letterSpacing: 1,
-                                              ),
-                                          ),
+                                          decoration: textInputDecoration.copyWith(hintText: 'PASSWORD'),
                                           onChanged: (val) {
                                             setState(() => password = val);
                                           },
@@ -193,8 +158,10 @@ class LoginState extends State<LoginScreen> {
                                               ),
                                               onPressed: () async {
                                               if (_formKey.currentState.validate()) {
+                                                  setState(() => loading = true);
                                                   dynamic result = await _yauth.signInEmailPass(email, password);
                                                   if (result == null) {
+                                                      setState(() => loading = false);
                                                       setState(() => error = "Your email and password does'nt match!");
                                                   }
                                               } else {
@@ -203,17 +170,6 @@ class LoginState extends State<LoginScreen> {
                                                 });
                                               }
                                           },
-                                          ),
-                                      ),
-                                      Container (
-                                          margin: EdgeInsets.only(
-                                              top:0
-                                          ),
-                                          child: Text(
-                                              error,
-                                              style: TextStyle (
-                                                color: Colors.red,
-                                              ),
                                           ),
                                       ),
                                   ],
@@ -337,6 +293,7 @@ class LoginState extends State<LoginScreen> {
           ]
       )
   );
+  }
 
   _handleLogin(BuildContext context) async {
       setState(

@@ -6,6 +6,9 @@ import 'package:yaniv/components/pill-button.component.dart';
 import 'package:yaniv/services/firebase.service.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:yaniv/services/auth.service.dart';
+import 'package:yaniv/shared/constants.dart';
+import 'package:yaniv/shared/loading.dart';
+
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -19,24 +22,25 @@ class SignupState extends State<SignupScreen> {
 
   final AuthService _yauth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   // Form validation
   bool _autoValidate = false;
   String password = '';
   String email = '';
-  String error = '';
+  String error = 'Enter your details below';
   String validateEmail(String value) {
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value))
-      return 'Enter Valid Email';
+      return 'Assaf! Enter a valid email!';
     else
       return null;
   }
 
 @override
-  build(BuildContext context) => Scaffold(
+  build(BuildContext context) { return loading ? LoadingAnimation() : Scaffold(
 
     
       // "resizeToAvoidBottomInset" Stops keyboard from pushing content from bottom
@@ -83,7 +87,7 @@ class SignupState extends State<SignupScreen> {
             Container(
                 padding: EdgeInsets.only(top: 10, bottom: 0, left: 30, right: 0),
                 child: Text(
-                    "Enter your details below",
+                    error,
                     style: const TextStyle(
                         color: Colors.white, 
                         fontWeight: FontWeight.w200,
@@ -105,72 +109,26 @@ class SignupState extends State<SignupScreen> {
                             /*TextFormField(
                               validator: (val) => val.isEmpty ? "Enter a username!" : null,
                               keyboardType: TextInputType.text,
-                              decoration: InputDecoration(
-                                  hintText: 'USER NAME',
-                                  hintStyle: TextStyle(
-                                      color: Color(0xB3FFFFFF),
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: 1,
-                                  ),
-                              ),
+                              decoration: textInputDecoration.copyWith(hintText: 'USER NAME'),
                               onChanged: (val) {
                                 setState(() => usrname = val);
                               },
                             ),*/
                             TextFormField(
+                              style: new TextStyle(color: Colors.white, fontSize: 14),
                               validator: validateEmail,
                               keyboardType: TextInputType.emailAddress,
-                              decoration: InputDecoration(
-                                fillColor: const Color(0x1AFFFFFF),
-                                            filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: const Color(0x4DFFFFFF),
-                                              )
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: const Color(0xFFFFFFFF),
-                                              )
-                                            ),
-                                  hintText: 'EMAIL ADDRESS',
-                                  hintStyle: TextStyle(
-                                      color: Color(0xB3FFFFFF),
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: 1,
-                                  ),
-                              ),
+                              decoration: textInputDecoration.copyWith(hintText: 'EMAIL'),
                               onChanged: (val) {
                                 setState(() => email = val);
                               },
                             ),
                             SizedBox(height: 10),
                             TextFormField(
+                              style: new TextStyle(color: Colors.white, fontSize: 14),
                               validator: (val) => val.length < 6 ? "Your password needs to be 6 chars or longer!" : null,
                               obscureText: true,
-                              decoration: InputDecoration(
-                                fillColor: const Color(0x1AFFFFFF),
-                                            filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: const Color(0x4DFFFFFF),
-                                              )
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: const Color(0xFFFFFFFF),
-                                              )
-                                            ),
-                                  hintText: 'PASSWORD',
-                                  hintStyle: TextStyle(
-                                      color: Color(0xB3FFFFFF),
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: 1,
-                                  ),
-                              ),
+                              decoration: textInputDecoration.copyWith(hintText: 'PASSWORD'),
                               onChanged: (val) {
                                 setState(() => password = val);
                               },
@@ -199,9 +157,11 @@ class SignupState extends State<SignupScreen> {
                                     ),
                                     onPressed: () async {
                                         if (_formKey.currentState.validate()) {
+                                            setState(() => loading = true);
                                             dynamic result = await _yauth.registerEmailPass(email, password);
                                             if (result == null) {
-                                                setState(() => error = "Please check your information");
+                                                setState(() => loading = false);
+                                                setState(() => error = "Assaf! Email already registered!");
                                             } else {
                                               Navigator.pushNamed(context, '/');
                                             }
@@ -213,147 +173,17 @@ class SignupState extends State<SignupScreen> {
                                     },
                                 ),
                             ),
-                            Container (
-                                margin: EdgeInsets.only(
-                                    top:20
-                                ),
-                                child: Text(
-                                    error,
-                                    style: TextStyle (
-                                      color: Colors.red,
-                                    ),
-                                ),
-                            ),
                         ],),
                 ),
 
             ),
 
-
-            /*new Container(
-                margin: new EdgeInsets.only(top: 20.0, left: 30, right: 30),
-                padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
-                height: 52,
-                child: TextField(
-                    keyboardType: TextInputType.emailAddress,
-                    style: TextStyle(
-                        color: Colors.white,
-                    ),
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'USER NAME',
-                        hintStyle: TextStyle(
-                            color: Color(0xB3FFFFFF),
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 1,
-                        ),
-                    ),
-                ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(5.0), 
-                        topRight: const Radius.circular(5.0)
-                    ),
-                    border: Border(
-                        top: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
-                        bottom: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
-                        left: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
-                        right: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
-                    ),
-                    color: Color(0x0DFFFFFF),
-                ),
-            ),
-
-            new Container(
-                margin: new EdgeInsets.only(top: 0.0, left: 30, right: 30),
-                padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
-                height: 52,
-                child: TextField(
-                    keyboardType: TextInputType.emailAddress,
-                    style: TextStyle(
-                        color: Colors.white,
-                    ),
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'EMAIL ADDRESS',
-                        hintStyle: TextStyle(
-                            color: Color(0xB3FFFFFF),
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 1,
-                        ),
-                    ),
-                ),
-                decoration: BoxDecoration(
-                    border: Border(
-                        top: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
-                        bottom: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
-                        left: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
-                        right: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
-                    ),
-                    color: Color(0x0DFFFFFF),
-                ),
-            ),
-
-            new Container(
-                margin: new EdgeInsets.only(top: 0.0, left: 30, right: 30),
-                padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
-                height: 52,
-                child: TextField(
-                    obscureText: true,
-                    style: TextStyle(
-                        color: Colors.white,
-                    ),
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'PASSWORD',
-                        hintStyle: TextStyle(
-                            color: Color(0xB3FFFFFF),
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 1,
-                        ),
-                    ),
-                ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: const Radius.circular(5.0), 
-                        bottomRight: const Radius.circular(5.0)
-                    ),
-                    border: Border(
-                        top: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
-                        bottom: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
-                        left: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
-                        right: BorderSide(width: 1.0, color: Color(0xFFFFFFFF)),
-                    ),
-                    color: Color(0x0DFFFFFF),
-                ),
-            ),
-
-            Container(
-                margin: new EdgeInsets.only(top: 20.0, left: 30, right: 30, bottom: 20.0),
-                height: 60,
-                child: new PillButton(
-                  gradient: new LinearGradient(
-                      colors: [const Color(0xFFA573FF), const Color(0xFFA573FF)]),
-                  child: new Text(
-                    'CREATE ACCOUNT',
-                    style: const TextStyle(
-                        color: Colors.white, 
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1,
-                        fontSize: 12.0,
-                    ),
-                  ),
-                  onPressed: () => print('Login Button Pressed'),
-                ),
-            ),*/
-
           ],
 
         ),
         
-      ]));
+      ])
+      );
+  }
 
 }

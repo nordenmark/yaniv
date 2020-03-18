@@ -7,6 +7,7 @@ import 'package:yaniv/models/game.model.dart';
 import 'package:yaniv/models/player.model.dart';
 import 'package:yaniv/services/firebase.service.dart';
 import 'package:yaniv/services/auth.service.dart';
+import 'package:yaniv/shared/loading.dart';
 
 TextStyle header =
     TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black);
@@ -20,18 +21,6 @@ class GamesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        /*appBar: AppBar(
-          title: Image.asset('assets/logo-blue.png', fit: BoxFit.contain),
-          elevation: 0,
-          actions: <Widget>[
-            FlatButton(
-              child: Text('Sign out'),
-              onPressed: () async {
-                await _yauth.signOut();
-              },
-            )
-          ],
-        ),*/
         body: Stack(fit: StackFit.expand, children: [
             Image(fit: BoxFit.cover, image: AssetImage('assets/main-background.png')),
             Column(
@@ -110,8 +99,7 @@ class GamesScreen extends StatelessWidget {
                     }).toList();
 
                     if (games.length > 0) {
-                      return GamesComponent(games: games);
-                      /*Padding(
+                      Padding(
                           padding:
                               EdgeInsets.only(top: 30, bottom: 15, left: 30, right: 30),
                           child: Text(
@@ -121,7 +109,8 @@ class GamesScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black),
                           )
-                      );*/
+                      );
+                      return GamesComponent(games: games);
                     } else {
                       return Container(
                         margin: EdgeInsets.all(30),
