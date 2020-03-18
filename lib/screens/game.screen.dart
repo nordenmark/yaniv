@@ -30,11 +30,13 @@ class GameScreen extends StatelessWidget {
                 },
               ),
               new FlatButton(
-                child: new Text("Delete"),
-                textColor: Colors.red,
+                child: new Text(
+                    "Delete",
+                    textColor: Colors.red,
+                ),
                 onPressed: () async {
-                  await firebaseService.deleteGame(gameId);
-                  Navigator.pushNamed(context, '/games');
+                    await firebaseService.deleteGame(gameId);
+                    Navigator.pushNamed(context, '/games');
                 },
               ),
             ],

@@ -6,6 +6,7 @@ import 'package:yaniv/components/pill-button.component.dart';
 import 'package:yaniv/models/game.model.dart';
 import 'package:yaniv/models/player.model.dart';
 import 'package:yaniv/services/firebase.service.dart';
+import 'package:yaniv/services/auth.service.dart';
 
 TextStyle header =
     TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black);
@@ -14,19 +15,39 @@ class GamesScreen extends StatelessWidget {
   final FirebaseService firebaseService = FirebaseService();
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
+  final AuthService _yauth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        /*appBar: AppBar(
+          title: Image.asset('assets/logo-blue.png', fit: BoxFit.contain),
+          elevation: 0,
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Sign out'),
+              onPressed: () async {
+                await _yauth.signOut();
+              },
+            )
+          ],
+        ),*/
         body: Stack(fit: StackFit.expand, children: [
-      Image(fit: BoxFit.cover, image: AssetImage('assets/main-background.png')),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-              child: Padding(
-                  padding: const EdgeInsets.only(top: 60, bottom: 0, left: 30),
-                  child: Image(image: AssetImage('assets/logo-blue.png')))),
+            Image(fit: BoxFit.cover, image: AssetImage('assets/main-background.png')),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                /*Container(
+                    child: Padding(
+                        padding: const EdgeInsets.only(top: 60, bottom: 0, left: 30, right: 30),
+                        child: Image(
+                          image: AssetImage(
+                            'assets/logo-blue.png'
+                          )
+                        )
+                    )
+                ),
           Padding(
               padding:
                   EdgeInsets.only(top: 30, bottom: 15, left: 30, right: 30),
@@ -36,7 +57,33 @@ class GamesScreen extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: Colors.black),
-              )),
+              )
+          ),*/
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.only(top: 50, bottom:0, left: 30, right: 30),
+                child: Image.asset('assets/logo-blue.png'),
+              ),
+              new Container(
+                padding: EdgeInsets.only(top: 50, bottom: 0, left: 30, right: 30),
+                alignment: Alignment.centerRight,
+                    child: FlatButton(
+                        child: Text(
+                          'Sign out',
+                        ),
+                        onPressed: () async {
+                          await _yauth.signOut();
+                        },
+                    ),
+                
+              ),
+            ],
+          ),
+
           Expanded(
               child: StreamBuilder(
                   stream: firebaseService.getGames(),
@@ -64,20 +111,48 @@ class GamesScreen extends StatelessWidget {
 
                     if (games.length > 0) {
                       return GamesComponent(games: games);
+                      /*Padding(
+                          padding:
+                              EdgeInsets.only(top: 30, bottom: 15, left: 30, right: 30),
+                          child: Text(
+                            'Previous games',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black),
+                          )
+                      );*/
                     } else {
-                      return Center(
+                      return Container(
+                        margin: EdgeInsets.all(30),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(const Radius.circular(20.0)),
+                            color: Colors.white,
+                        ),
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                            Image(
-                              image: AssetImage('assets/games-zero-state.png'),
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(top: 16),
-                                child: Text(
-                                    "You haven't played a game yet, start a new one!"))
-                          ]));
+                                  Image(
+                                    width: 180,
+                                    image: AssetImage('assets/games-zero-state.png'),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(30),
+                                      child: Text(
+                                        
+                                          "You haven't played a game yet, start a new one!",
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16.0,
+                                              
+                                          ),
+                                          textAlign: TextAlign.center,
+                                      ),
+                                  )
+                              ]
+                          )
+                      );
                     }
                   })),
           Center(
@@ -96,7 +171,7 @@ class GamesScreen extends StatelessWidget {
                   await firebaseService.createNewGame();
                 },
                 child: Text(
-                  'NEW GAME',
+                  "NEW GAME",
                   style: TextStyle(
                       color: Colors.white,
                       letterSpacing: 1.3,
