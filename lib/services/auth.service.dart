@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:yaniv/services/userdatabase.service.dart';
-import 'package:faker/faker.dart';
 
 // custom user model
 class User {

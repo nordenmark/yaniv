@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:yaniv/components/pill-button.component.dart';
 import 'package:yaniv/services/firebase.service.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:yaniv/services/auth.service.dart';
-import 'package:yaniv/shared/constants.dart';
-import 'package:yaniv/shared/loading.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class ForgotScreen extends StatefulWidget {
   @override
@@ -15,8 +11,6 @@ class ForgotScreen extends StatefulWidget {
 }
 
 class ForgotState extends State<ForgotScreen> {
-  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseService firebaseService = FirebaseService();
   bool showIndicator = false;
 

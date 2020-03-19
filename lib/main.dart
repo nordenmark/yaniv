@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaniv/screens/game.screen.dart';
 import 'package:yaniv/screens/games.screen.dart';
-import 'package:yaniv/screens/login.screen.dart';
 import 'package:yaniv/screens/new-game.screen.dart';
 import 'package:yaniv/screens/signup.screen.dart';
 import 'package:yaniv/screens/forgot.screen.dart';
