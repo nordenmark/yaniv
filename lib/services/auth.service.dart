@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:yaniv/services/userdatabase.service.dart';
+import 'package:faker/faker.dart';
 
 // custom user model
 class User {
@@ -29,6 +31,9 @@ class AuthService {
       try {
         AuthResult result = await _yauth.signInWithEmailAndPassword(email: email, password: password);
         FirebaseUser user = result.user;
+
+        // create new document with user email
+        await UserDatabaseService(email: user.email).updateUserData('New player');
         return _userFromFirebaseUser(user);
         
       } catch(e) {
